@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <title> Doodle4rce </title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/board.css" />
+    <link rel="stylesheet" href="css/chat.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jscolor.js"></script>
+    <script type="text/javascript" src="js/whiteboard.js"></script>
+</head>
+
+<body>
+
+    <label id="roomname" style="visibility:hidden"><%=roomname%></label>
+    <label id="username" style="visibility:hidden"><%=username%></label>
+
+    <canvas class="cnv" id="canvas"></canvas>
+    <canvas class="cnv" id="layer"></canvas>
+
+    <div class="boardWidget">
+
+        <div class="itemsContainer" id="toolContainer">
+            <button class="tool boardBtn boardBtnSelected" id="pencil" title="Pencil"><img src="images/pencil.ico" /></button>
+            <button class="tool boardBtn" id="chalk" title="Chalk"><img src="images/chalk.ico" /></button>
+            <button class="tool boardBtn" id="marker" title="Marker"><img src="images/marker.ico" /></button>
+            <button class="tool boardBtn" id="spray" title="Spray"><img src="images/spray.ico"></button>
+            <button class="tool boardBtn" id="circleBrush" title="Circle Brush"><img src="images/circleBrush.ico" /></button>
+            <button class="tool boardBtn" id="doubleBrush" title="Double Brush"><img src="images/doubleBrush.ico" /></button>
+            <button class="tool boardBtn" id="eraser" title="Eraser"><img src="images/rubber.ico" /></button>
+            <button class="tool boardBtn" id="text"><i class="fa fa-font" title="Text"></i></button>
+            <button id="bucket" class=" tool boardBtn" title="Bucket"><i class="fa fa-shopping-basket"></i></button>
+
+            <!-- <button class="boardBtn">|</button> -->
+
+            <button id="clear" class="boardBtn boardBtnSpecial" title="Clear"><i class="fa fa-recycle"> </i></button>
+            <button id="undo" class="boardBtn boardBtnSpecial" title="Undo"><img src="images/undo.ico"></button>
+            <button id="save" class="boardBtn boardBtnSpecial" title="Save"><img src="images/save.ico"></button>
+
+            <hr>
+            <button class="shape tool  boardBtn" id="rectangle" title="Rectangle"><img src="images/rectangle.ico"></button>
+            <!-- <button class="shape tool  boardBtn" id="line" title="Line">/|\</button> -->
+            <button class="shape tool  boardBtn" id="circle" title="Circle"><img src="images/circle.ico"></button>
+            <button class="shape tool  boardBtn" id="ellipse" title="Ellipse"><img src="images/ellipse.ico" /></button>
+            <button class="shape tool  boardBtn" id="moon" title="Moon"><img src="images/moon.ico"></button>
+            <button class="shape tool  boardBtn" id="star" title="Star"><img src="images/star.ico"></button>
+            <button class="shape tool  boardBtn" id="arrow" title="Arrow"><img src="images/arrow.ico" /></i></button>
+            <button class="shape tool  boardBtn" id="triangle" title="Triangle"><img src="images/triangle.ico" alt="" class="src"></button>
+            <button class="shape tool  boardBtn" id="face" title="Face"><img src="images/smiley.ico"></button>
+            <button class="shape tool  boardBtn" id="love" title="Love"><img src="images/heart.ico" /></button>
+
+            <!-- <button class="boardBtn boardBtnSpecial">|</button> -->
+            <label><b>Size:</b></label>
+            <select id="size" class="boardBtn">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="jscolor {valueElement:'', styleElement:'currentColor', onFineChange:'updateCurrentColor(this)'}" title="Choose Colors" id="currentColor"></div>
+    </div>
+
+    <div class="chatWidget">
+        <div class="chatHead">
+            <label id="chatMembers"> Chats : 0 </label>
+            <button id="chatMinMax" class="chatBtn" title="Maximize/Minimize"><i class="fa fa-caret-down"></i></button>
+            <button  class="chatBtn" title="Settings"><i class="fa fa-gear"></i></button>
+        </div>
+        <div class="chatBody"></div>
+
+        <input type="text" class="msgBox" id="txtChatMsg" />
+        <button id="btnSend" title="Send" class="btn"><i class="fa fa-send"></i></button>
+
+    </div>
+
+    <div class="ProblemWidget">
+        
+    </div>
+
+    <div id="textControl">
+        <input type="text" class="boardBtn" id="txtText" placeholder="Enter text here" />
+        <button class="boardBtn txtFontStyle" data-value="bold" title="Bold"><i class="fa fa-bold"></i></button>
+        <button class="boardBtn txtFontStyle" data-value="italic" title="Italic"><i class="fa fa-italic"></i></button>
+        <button class="boardBtn txtFontStyle" data-value="" title="Normal">N</button>
+        <select id="txtFontFamily" class="boardBtn">
+            <option>monoscape</option>
+            <option>cursive</option>
+            <option>sans-serif</option>
+            <option>serif</option>
+            <option>fantasy</option>
+        </select>
+        <input type="number" id="txtFontSize" class="boardBtn" value="12" max="72" min="8" />
+        <button class="boardBtn" id="txtInsert">Insert</button>
+        <button class="boardBtn" id="txtClose">Close</button>
+    </div>
+
+    <button class="notifier btn" id="chatNotifier"><i class="fa fa-bell"></i></button>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title> Doodle4rce </title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css" />
+       <!-- <script type="text/javascript" src="js/molecule.js"></script> -->
+</head>
+
+<body>
+
+    <div id="background"></div>
+    <p class="title">DOODLE 4RCE</p>
+
+    <p class="subtitle">THINK * CREATE * DOODLE</p>
+
+    <p class="subtitle">Create a new room or join an existing one</p>
+
+    <br>
+
+    <form method="post" action="/login">
+        <input type="text" placeholder="Enter Username" name="username" />
+        <br>
+        <input type="text" placeholder="Enter Roomname" name="roomname" />
+        <br>
+        <button type="submit" class="btn">Create or Join Room</button>
+    </form>
+
+    <button class="errorBox" style="visibility:<%=visibility%>">
+        <%if(msg){%>
+            <%=msg%>
+                <%}%>
+    </button>
+</body>
+
+</html>
