@@ -6,6 +6,10 @@ var bodyParser = require('body-parser'); // for reading POSTed form data into `r
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+const ProblemStatement = require("./problem").ProblemStatement;
+// const ProblemProvider = require("./problem").ProblemProvider;
+
+
 // must use cookieParser before expressSession
 
 app.use(bodyParser.json());
@@ -89,12 +93,14 @@ io.on('connection', function (socket) {
             flag = 0;
             console.log("Timer cleared");
         } else {
+            let problemStatement = ProblemStatement.getTestProblemStatement(); //todo!
             rooms[roomname] = {
                 data: {
                     boardData: [],
                     messages: []
                 },
-                members: [username]
+                members: [username],
+                problemStatement:problemStatement
             };
             console.log("Created new room " + roomname);
         }
@@ -104,7 +110,7 @@ io.on('connection', function (socket) {
         socket.username = data.username;
         console.log(socket.id + " joined " + socket.roomname);
         io.in(socket.roomname).emit('joinConfirmed', rooms[roomname]);
-
+        
     });
 
     socket.on('drawing', function (data) {

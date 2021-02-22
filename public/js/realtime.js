@@ -47,7 +47,10 @@
 
                 chat.members = data.members;
                 $("#chatMembers").text("Chat : " + chat.members.length);
-
+                
+                //todo: display problem statement in problem statement area!
+                $('#problemStatement').text("title: "+data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
+                console.log("problemStatement for thisroom: "+JSON.stringify(data.problemStatement));
             });
 
             rtMan.socket.on('left', function (data) {
