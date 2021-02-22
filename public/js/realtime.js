@@ -51,12 +51,25 @@
                 //todo: display problem statement in problem statement area!
                 $('#problemStatement').text("title: "+data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
                 console.log("problemStatement for thisroom: "+JSON.stringify(data.problemStatement));
+                setTimeout(function(){
+                    rtMan.socket.emit("solution", {index:1});
+                }, 5000);
             });
 
             rtMan.socket.on('left', function (data) {
                 chat.members = data;
                 $("#chatMembers").text("Chat : " + chat.members.length);
             });
+
+            rtMan.socket.on('start voting', function(solutions){
+                console.log("show overlay!; show solutions:",solutions);
+            });
+
+            rtMan.socket.on('time remaining', function(data){
+                console.log('time remaining :', data);
+            });
+
+            
 
         },
 

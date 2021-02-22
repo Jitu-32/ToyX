@@ -59,7 +59,10 @@ app.post('/login', function (req, res) {
             msg: 'Invalid Roomname'
         });
     } else {
-
+        // res.redirect({
+        //     roomname: roomname,
+        //     username: username
+        // }, '/index');
         res.render('index', {
             roomname: roomname,
             username: username
@@ -100,9 +103,22 @@ io.on('connection', function (socket) {
                     messages: []
                 },
                 members: [username],
-                problemStatement:problemStatement
+                problemStatement: problemStatement,
+                timeRemaining: 0,
+                solutions : {},
             };
             console.log("Created new room " + roomname);
+            
+            rooms[roomname].timeRemaining = 10; // 10 seconds to answer the solution after problem statement send!!
+            let theInterval = setInterval(function(){
+                io.in(socket.roomname).emit('time remaining', rooms[roomname].timeRemaining);
+                if(rooms[roomname].timeRemaining == 0){ 
+                    console.log("times up boys!!");
+                    clearInterval(theInterval);
+                    io.in(socket.roomname).emit('start voting', rooms[roomname].solutions);
+                }else
+                    rooms[roomname].timeRemaining--;
+            }, 1000)
         }
 
         socket.join(data.roomname);
@@ -162,6 +178,16 @@ io.on('connection', function (socket) {
         //notify other members
         io.in(socket.roomname).emit('left', rooms[socket.roomname].members);
 
+    });
+
+    socket.on('solution', function(data){
+        thisRoom = rooms[socket.roomname];
+        if(thisRoom.timeRemaining > 0){
+            thisRoom.solutions[socket.username] = data;
+            console.log('added solution by : ['+socket.username+'] is', data, "time:", socket.timeRemaining);
+        }else{
+            console.log('IGNORED solution by : ['+socket.username+'] is', data, "time:", socket.timeRemaining);
+        }
     });
 
     // io.in().emit(,)
