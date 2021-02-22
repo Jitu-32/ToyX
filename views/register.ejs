@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Auth</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<link rel="stylesheet" href="./css/login.css">
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous"
+  />
+
+
+	<script type="text/javascript">
+		$(document).ready( () => {
+
+			$( "#form1" ).submit( (event) => {
+				event.preventDefault();
+
+				$.ajax({
+					type: 'POST',
+					url: '/register',
+					data: $('#form1').serialize(),
+					dataType: "json",
+					success: (response) => {
+						//alert("a");
+						//console.log(response.Success);
+						$('#form1')[0].reset();
+
+						document.getElementById("check").innerHTML=response.Success;
+         					//ADD THIS CODE
+         					setTimeout( () => {
+         						document.getElementById("check").innerHTML="";
+         					},3000);
+         					if (response.Success=="You are regestered,You can login now.") {
+         						document.getElementById("aa").click();
+         					};
+         				},
+         				error: () => {
+         				}
+         			})
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<nav class="navbar py-0 navbar-expand-lg navbar-dark bg-info">
+
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home">
+              <img src="images/bg.png" width="30" height="24" class="d-inline-block align-top">
+              <b>DOODLE 4RCE</b>
+            </a>
+          </div>
+
+          <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">:)</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="home"><b>HOME</b></a>
+                      </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="login"><b>PLAY</b></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="community"><b>COMMUNITY</b></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="contact"><b>CONTACT</b></a>
+                  </li>
+                </ul>
+                <!-- <span class="navbar-text">
+                  THINK * CREATE * DOODLE
+                </span> -->
+                <a class="btn btn-primary" href="/userlogin" role="button">Login</a>
+              </div>
+            </div>
+          <!-- </nav> -->
+      </nav>
+
+
+	<div>
+		<subtitile>Join our doodle community</subtitile>
+		<!-- <div class="form-group"> -->
+			<form id="form1" method="post">
+				<input type="email" name="email" placeholder="E-mail" required=""><br/> <br/>
+				<input type="text" name="username" placeholder="Username" required=""><br/> <br/>
+				<input type="password" name="password" placeholder="Password" required=""><br/> <br/>
+				<input type="password" name="passwordConf" placeholder="Confirm Password" required=""><br/> <br/>
+				<input type="submit" value="Register" class="btn btn-success">
+			</form>
+		<!-- </div> -->
+		
+		<div class="mssg bg-danger">
+			<span id="check"></span>
+		</div>
+		<div>
+			<span>Already Registered! <a href="/userlogin">Login</a></span>
+		</div>
+		<div id="LangTable"><a href="/userlogin" id="aa"></a>
+		</div>
+	</div>
+</body>
+</html>
