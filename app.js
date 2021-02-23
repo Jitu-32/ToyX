@@ -80,8 +80,9 @@ app.get('/community', (req, res, next) => {
 			res.redirect('/register');
 		} else {
 			//console.log("found");
+            req.session.data = data
       let blogs = await Blog.find().sort({ timeCreated: 'desc' });
-			res.render('community', { blogs: blogs });
+			res.render('community', { blogs: blogs, data : data });
 		}
 	});
 });
@@ -144,6 +145,16 @@ app.post('/login', function (req, res) {
   }
 
 });
+
+app.get('/profile',  function(req, res) {
+    
+    var user = req.data
+    console.log(req.session.userId)
+    console.log(req.session.data)
+    //console.log(req)
+
+    res.render('profile', { title: 'Profile Page', data : req.session.data });
+}); 
 
 
 
