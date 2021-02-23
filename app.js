@@ -156,6 +156,15 @@ app.get('/profile',  function(req, res) {
     res.render('profile', { title: 'Profile Page', data : req.session.data });
 }); 
 
+app.get('/sss',  function(req, res) {
+    
+  var user = req.data
+  //console.log(req)
+  console.log(req.body)
+  //console.log(req)
+
+  res.render('sss', { title: 'Image Page', data : req.session.data });
+}); 
 
 
 var rooms = {};
