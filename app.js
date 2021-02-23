@@ -76,7 +76,6 @@ var rooms = {};
 
 io.on('connection', function (socket) {
 
-
     var timer, flag = 0;
 
     socket.on('coming', function (data) {
@@ -105,17 +104,23 @@ io.on('connection', function (socket) {
                 members: [username],
                 problemStatement: problemStatement,
                 timeRemaining: 0,
-                solutions : {},
+                solutions : [],
             };
             console.log("Created new room " + roomname);
             
-            rooms[roomname].timeRemaining = 10; // 10 seconds to answer the solution after problem statement send!!
+            rooms[roomname].timeRemaining = 20; // seconds to answer the solution after problem statement send!!
             let theInterval = setInterval(function(){
-                io.in(socket.roomname).emit('time remaining', rooms[roomname].timeRemaining);
+                io.in(socket.roomname).emit('timeRemaining', rooms[roomname].timeRemaining);
                 if(rooms[roomname].timeRemaining == 0){ 
-                    console.log("times up boys!!");
                     clearInterval(theInterval);
-                    io.in(socket.roomname).emit('start voting', rooms[roomname].solutions);
+                    console.log("times up boys!!");
+                    
+                    // waiting for 5 seconds to recieve all solutions
+                    setTimeout(()=>{
+                        // socket.removeAllListeners("solution"); // no more solutions allowed!
+                        io.in(socket.roomname).emit('startVoting', rooms[socket.roomname].solutions);
+                    },5000);
+
                 }else
                     rooms[roomname].timeRemaining--;
             }, 1000)
@@ -182,15 +187,15 @@ io.on('connection', function (socket) {
 
     socket.on('solution', function(data){
         thisRoom = rooms[socket.roomname];
-        if(thisRoom.timeRemaining > 0){
-            thisRoom.solutions[socket.username] = data;
-            console.log('added solution by : ['+socket.username+'] is', data, "time:", socket.timeRemaining);
-        }else{
-            console.log('IGNORED solution by : ['+socket.username+'] is', data, "time:", socket.timeRemaining);
-        }
+        thisRoom.solutions.push(data);
+        console.log('added solution by : ['+socket.username+']');
+        // if(waitingForSoln){
+        //     thisRoom.solutions.push(data);
+        //     console.log('added solution by : ['+socket.username+'] is');
+        // }else{
+        //     console.log('IGNORED solution by : ['+socket.username+'] is');
+        // }
     });
-
-    // io.in().emit(,)
 });
 
 

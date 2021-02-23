@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/board.css" />
     <link rel="stylesheet" href="css/chat.css" />
     <link rel="stylesheet" href="css/solution.css" />
+    <link rel="stylesheet" href="css/general.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jscolor.js"></script>
@@ -85,72 +86,18 @@
         
     </div>
 
-    <div class="VotingWidget">
+    <div class="VotingWidget" style="visibility: collapse;">
         <h1 style="color: aliceblue;">Vote for best solution: </h1>
+        
+        <div class="ProgressCircle">
+            <p>Waiting for Solutions...</p>
+        </div>
         <div class="VoteItemContainer">
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
             
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-            
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
-
-            <div class="card VoteItem">
-                <div>
-                    <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="Solution" style="height: 100; width: 100%;">
-                    <p>Architect & Engineer</p>
-                    <b>$username</b>
-                </div>
-            </div>
+            <!-- <div class="card VoteItem">
+                <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="solution" style="height: 100; width: 100%;">
+                <p>username</p>
+            </div> -->
     
         </div>
         

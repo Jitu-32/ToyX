@@ -16,7 +16,8 @@
 
             rtMan.socket.on('drawing', function (data) {
 
-                rtMan.drawFromSocket(data.boardData);
+                // not syncing drawing with all!
+                // rtMan.drawFromSocket(data.boardData);
 
             });
 
@@ -35,7 +36,7 @@
 
             rtMan.socket.on('joinConfirmed', function (data) {
 
-                console.log(data.data.boardData);
+                console.log("boardData:", data.data.boardData);
 
                 for (i = data.data.boardData.length - 1; i >= 0; i--) {
                     rtMan.drawFromSocket(data.data.boardData[i]);
@@ -51,9 +52,6 @@
                 //todo: display problem statement in problem statement area!
                 $('#problemStatement').text("title: "+data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
                 console.log("problemStatement for thisroom: "+JSON.stringify(data.problemStatement));
-                setTimeout(function(){
-                    rtMan.socket.emit("solution", {index:1});
-                }, 5000);
             });
 
             rtMan.socket.on('left', function (data) {
@@ -61,15 +59,52 @@
                 $("#chatMembers").text("Chat : " + chat.members.length);
             });
 
-            rtMan.socket.on('start voting', function(solutions){
+            rtMan.socket.on('startVoting', function(solutions){
                 console.log("show overlay!; show solutions:",solutions);
+                $(".VotingWidget").get()[0].style.visibility = "visible";
+                $(".ProgressCircle").hide();
+                $(".VoteItemContainer").show();
+
+                let voteItemContainer = $(".VoteItemContainer").get()[0];
+                solutions.forEach(aSolution => {                    
+                    let imgElm = document.createElement("img");
+                    imgElm.setAttribute("src", aSolution['imageUrl']);
+                    imgElm.style.height = "100";
+                    imgElm.style.width = "100%";
+                    imgElm.alt = "solution";
+                    
+                    let usernameElm = document.createElement("p");
+                    usernameElm.innerText = aSolution['username'];
+
+                    let voteItem = document.createElement("div");
+                    voteItem.setAttribute("class", "card VoteItem");
+
+                    voteItem.appendChild(imgElm);
+                    voteItem.appendChild(usernameElm);
+
+                    voteItemContainer.appendChild(voteItem);
+                });
+                
             });
 
-            rtMan.socket.on('time remaining', function(data){
-                console.log('time remaining :', data);
+            rtMan.socket.on('timeRemaining', function(seconds){
+                console.log('timeRemaining :', seconds);
+                if(seconds == 0){
+                    // disable drawing now and send the solution!
+                    $(".VotingWidget").get()[0].style.visibility = "visible";
+                    $(".ProgressCircle").show();
+                    $(".VoteItemContainer").hide();
+                    let thisSolution = {
+                        username: rtMan.username,
+                        imageUrl: $("#canvas").get()[0].toDataURL(),
+                    };
+                    console.log("solution emitted by this user:", thisSolution);
+                    rtMan.socket.emit("solution", thisSolution);
+                }
+                
             });
 
-            
+
 
         },
 
