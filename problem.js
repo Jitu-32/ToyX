@@ -1,7 +1,5 @@
+
 class ProblemStatement{
-    static WORD_TYPE = "word";
-    static PICTURE_TYPE = "picture";
-    static GUESS_TYPE = "guess";
     
     constructor(type, heading){
         this.type = type;
@@ -17,22 +15,26 @@ class ProblemStatement{
     }
 
     addKeyWords(words){
-        words = []
-        line = ""
-        for(w in words){
-            line += w + "\n";
+        let line = ""
+        for(let i in words){
+            line += words[i] + "\n";
         }
         this.desc = line;
+        // console.log("words:", words, "line: "+line, "\n:[",this.desc,"]");
     }
 
 }
 
-var ps = new ProblemStatement(ProblemStatement.WORD_TYPE, "Guess the doodle for these words:");
-ps.addKeyWords(["word1","word2"]);
+ProblemStatement.WORD_TYPE = "word";
+ProblemStatement.PICTURE_TYPE = "picture";
+ProblemStatement.GUESS_TYPE = "guess";
 
-switch(ps.type){
-    case ProblemStatement.GUESS_TYPE:
-        break;
-    case ProblemStatement.GUESS_TYPE:
-        break;
+ProblemStatement.getTestProblemStatement = function(){
+    const ps = new ProblemStatement(ProblemStatement.WORD_TYPE, "Draw doodle for these words:");
+    ps.addKeyWords(["ice", "cream", "heam-cream"]);
+    return ps;
+}
+
+module.exports = {
+    ProblemStatement
 }

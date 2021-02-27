@@ -6,6 +6,10 @@ var bodyParser = require('body-parser'); // for reading POSTed form data into `r
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+const ProblemStatement = require("./problem").ProblemStatement;
+// const ProblemProvider = require("./problem").ProblemProvider;
+
+
 // must use cookieParser before expressSession
 
 app.use(bodyParser.json());
@@ -55,7 +59,10 @@ app.post('/login', function (req, res) {
             msg: 'Invalid Roomname'
         });
     } else {
-
+        // res.redirect({
+        //     roomname: roomname,
+        //     username: username
+        // }, '/index');
         res.render('index', {
             roomname: roomname,
             username: username
@@ -68,7 +75,6 @@ app.post('/login', function (req, res) {
 var rooms = {};
 
 io.on('connection', function (socket) {
-
 
     var timer, flag = 0;
 
@@ -89,14 +95,35 @@ io.on('connection', function (socket) {
             flag = 0;
             console.log("Timer cleared");
         } else {
+            let problemStatement = ProblemStatement.getTestProblemStatement(); //todo!
             rooms[roomname] = {
                 data: {
                     boardData: [],
                     messages: []
                 },
-                members: [username]
+                members: [username],
+                problemStatement: problemStatement,
+                timeRemaining: 0,
+                solutions : [],
             };
             console.log("Created new room " + roomname);
+            
+            rooms[roomname].timeRemaining = 20; // seconds to answer the solution after problem statement send!!
+            let theInterval = setInterval(function(){
+                io.in(socket.roomname).emit('timeRemaining', rooms[roomname].timeRemaining);
+                if(rooms[roomname].timeRemaining == 0){ 
+                    clearInterval(theInterval);
+                    console.log("times up boys!!");
+                    
+                    // waiting for 5 seconds to recieve all solutions
+                    setTimeout(()=>{
+                        // socket.removeAllListeners("solution"); // no more solutions allowed!
+                        io.in(socket.roomname).emit('startVoting', rooms[socket.roomname].solutions);
+                    },5000);
+
+                }else
+                    rooms[roomname].timeRemaining--;
+            }, 1000)
         }
 
         socket.join(data.roomname);
@@ -104,7 +131,7 @@ io.on('connection', function (socket) {
         socket.username = data.username;
         console.log(socket.id + " joined " + socket.roomname);
         io.in(socket.roomname).emit('joinConfirmed', rooms[roomname]);
-
+        
     });
 
     socket.on('drawing', function (data) {
@@ -158,7 +185,17 @@ io.on('connection', function (socket) {
 
     });
 
-    // io.in().emit(,)
+    socket.on('solution', function(data){
+        thisRoom = rooms[socket.roomname];
+        thisRoom.solutions.push(data);
+        console.log('added solution by : ['+socket.username+']');
+        // if(waitingForSoln){
+        //     thisRoom.solutions.push(data);
+        //     console.log('added solution by : ['+socket.username+'] is');
+        // }else{
+        //     console.log('IGNORED solution by : ['+socket.username+'] is');
+        // }
+    });
 });
 
 
