@@ -11,6 +11,8 @@
         createSocket: function () {
 
             rtMan.socket = io();
+
+            console.log("TEST_DEBUG: ", this.socket.username, this.socket.roomname);
             rtMan.username = $("#username").text();
             rtMan.roomname = $("#roomname").text();
 
@@ -49,9 +51,7 @@
                 chat.members = data.members;
                 $("#chatMembers").text("Chat : " + chat.members.length);
                 
-                //todo: display problem statement in problem statement area!
-                $('#problemStatement').text("title: "+data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
-                console.log("problemStatement for thisroom: "+JSON.stringify(data.problemStatement));
+                rtMan.socket.emit("isPlayerReady", thisUserReady);
             });
 
             rtMan.socket.on('left', function (data) {
@@ -61,7 +61,7 @@
 
             rtMan.socket.on('startVoting', function(solutions){
                 console.log("show overlay!; show solutions:",solutions);
-                $(".VotingWidget").get()[0].style.visibility = "visible";
+                $(".VotingWidget").get()[0].style.display = "block";
                 $(".ProgressCircle").hide();
                 $(".VoteItemContainer").show();
 
@@ -81,6 +81,12 @@
 
                     voteItem.appendChild(imgElm);
                     voteItem.appendChild(usernameElm);
+                    voteItem.onclick = function(ev){
+                        rtMan.socket.emit("votedSolution", {
+                            username : aSolution['username'],
+                        });
+                        $(".VoteItemContainer").hide();
+                    };
 
                     voteItemContainer.appendChild(voteItem);
                 });
@@ -88,10 +94,11 @@
             });
 
             rtMan.socket.on('timeRemaining', function(seconds){
-                console.log('timeRemaining :', seconds);
+                // console.log('timeRemaining :', seconds);
+                $('#roundFinishingTime').html("Time remaining: " + seconds + " seconds");
                 if(seconds == 0){
                     // disable drawing now and send the solution!
-                    $(".VotingWidget").get()[0].style.visibility = "visible";
+                    $(".VotingWidget").get()[0].style.display = "block";
                     $(".ProgressCircle").show();
                     $(".VoteItemContainer").hide();
                     let thisSolution = {
@@ -100,11 +107,65 @@
                     };
                     console.log("solution emitted by this user:", thisSolution);
                     rtMan.socket.emit("solution", thisSolution);
-                }
-                
+                }                
             });
 
+            rtMan.socket.on('updatePlayersList', function(allPlayersReadyList){
+                console.log("updatePlayersList:", allPlayersReadyList);
+                
+                //refreshing all playerslist
+                let playersJoinedList = $("#playersJoinedList").get()[0];
+                playersJoinedList.replaceChildren();
+                
+                let allReady = true;
+                for(let i=0; i<allPlayersReadyList.length; ++i){
+                    let username = allPlayersReadyList[i][0];
+                    let isReady = allPlayersReadyList[i][1];
 
+                    console.log("issue:", username, isReady);
+                    let playerElm = document.createElement("p");
+                    let isready_str = isReady? "ready" : "not ready";
+                    playerElm.innerText = username + " is " + isready_str;
+                    playerElm.style.color = "#FFF";
+                    playersJoinedList.appendChild(playerElm);
+
+                    allReady = allReady && isReady;
+                }
+                if(!allReady){
+                    $('#lobbyWaitingTime').html("");
+                }
+            });
+
+            let thisUserReady = false;
+            $("#startRoundButton").on("click", function(){
+                // emit I am ready!
+                thisUserReady = !thisUserReady;
+                rtMan.socket.emit("isPlayerReady", thisUserReady);
+
+                if(thisUserReady)
+                    $("#startRoundButton").html("I'm Not Ready!");
+                else 
+                    $("#startRoundButton").html("I'm Ready!");
+            });
+            
+
+            rtMan.socket.on('roundStartTimeRemaining', function(seconds){
+                $('#lobbyWaitingTime').html("Starting in "+seconds);
+            });
+
+            rtMan.socket.on('startRound', function(data) {
+                $('.LobbyWidget').hide();
+                console.log("startRound: "+JSON.stringify(data));
+                //todo: display problem statement in problem statement area!
+                $('#problemStatement').text("title: " + data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
+            })
+
+            rtMan.socket.on('roundWinner', function(winner) {
+                $('.VotingWidget').hide();
+                $('.ResultsWidget').show();
+                console.log("winner: ", winner);
+                $('#winnerUserName').html("#1:    " + winner.username + " got " + winner.votes +" vote(s)");
+            })
 
         },
 
