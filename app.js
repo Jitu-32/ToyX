@@ -125,6 +125,10 @@ app.get('/contact', function (req, res) {
   res.render('contact');
 });
 
+app.get('/drawboard', function (req, res) {
+  res.render('drawboard');
+});
+
 app.post('/login', function (req, res) {
 
   var roomname = req.body.roomname;
