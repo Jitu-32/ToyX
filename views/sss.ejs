@@ -1,0 +1,27 @@
+<div id="target">
+    enim posuere sagittis. Fusce at egestas enim, eu hendrerit enim.
+</div>
+
+<button onclick="takeScreenShot()">to image</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+
+<script>
+
+window.takeScreenShot = function() {
+    html2canvas(document.getElementById("target"), {
+        onrendered: function (canvas) {
+            document.body.appendChild(canvas);
+            canvas.toBlob(function(blob) {
+              saveAs(blob, "wholePage.png");
+        });
+            
+        },
+        width:320,
+        height:220,
+
+       
+    });
+}
+</script>

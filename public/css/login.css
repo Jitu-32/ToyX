@@ -32,13 +32,13 @@ body {
 input {
     border-style: solid;
     border-width: 2px;
-    border-color: saddlebrown;
+    border-color:rgb(59, 129, 187);
     border-radius: 5px;
     outline: none;
     padding: 10px;
-    margin: 5px;
+    margin: 20px;
     width: 500px;
-    color: saddlebrown;
+    color: rgb(69, 67, 216);
     font-family: cursive;
     text-align: center;
     font-size: 15px;
@@ -62,7 +62,7 @@ input {
 }
 
 .btn:hover {
-    background-color: saddlebrown;
+    background-color: rgb(17, 42, 122);
     color: white;
     opacity: 0.6;
 }
@@ -70,13 +70,13 @@ input {
 .errorBox {
     outline: none;
     border-style: solid;
-    border-color: darkred;
+    border-color: rgb(97, 207, 33);
     border-width: 2px;
     min-width: 300px;
     padding: 10px;
     opacity: 0.9;
     font-family: cursive;
     color: white;
-    background-color: indianred;
+    /* background-color: rgb(247, 240, 240); */
     border-radius: 5px;
 }
