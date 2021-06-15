@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/board.css" />
     <link rel="stylesheet" href="css/chat.css" />
+    <link rel="stylesheet" href="css/solution.css" />
+    <link rel="stylesheet" href="css/lobby.css" />
+    <link rel="stylesheet" href="css/results.css" />
+    <link rel="stylesheet" href="css/general.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jscolor.js"></script>
@@ -62,8 +66,6 @@
         </div>
 
         <div class="jscolor {valueElement:'', styleElement:'currentColor', onFineChange:'updateCurrentColor(this)'}" title="Choose Colors" id="currentColor"></div>
-
-
     </div>
 
     <div class="chatWidget">
@@ -79,6 +81,42 @@
 
     </div>
 
+    <div class="LobbyWidget" >
+        <h1 style="color: aliceblue;">Round 1 lobby</h1>
+        <button id="startRoundButton" type="button">I'm Ready</button>
+        <p id="lobbyWaitingTime" style="color: red; border: 1;">Starting in 5</p>
+        <div id="playersJoinedList"></div>
+    </div>
+
+    <!-- todo: add style to css! -->
+    <div class="ProblemWidget" style="text-align: left;border: 1px solid;padding: 20px;position: absolute;top: 100px;z-index: 2;right: 0;bottom: 0;width: 30%;">
+        <h1>Problem : </h1>
+        <pre id="problemStatement"></pre>
+        <p id="roundFinishingTime" style="color: red; border: 1;"></p>
+    </div>
+
+    <div class="VotingWidget" style="display: none;">
+        <h1 style="color: aliceblue;">Vote for best solution: </h1>
+        
+        <div class="ProgressCircle">
+            <p>Waiting for Solutions...</p>
+        </div>
+        <div class="VoteItemContainer">
+            <!-- <div class="card VoteItem">
+                <img src="https://t4.ftcdn.net/jpg/02/53/09/35/360_F_253093527_JQYXm71ouenCl3R29uIw0d5Fpovn8X3I.jpg" alt="solution" style="height: 100; width: 100%;">
+                <p>username</p>
+            </div> -->
+    
+        </div>        
+    </div>
+
+    <div class="ResultsWidget" style="display: none;">
+        <h1 style="color: aliceblue;">Round 1 Results are:</h1>
+        <h2 id="winnerUserName" style="padding: 10px; border-radius: 25px; background-color: blue; color: aliceblue;"></h2>
+
+        <!-- todo: add scores of all users -->
+    </div>
+    
     <div id="textControl">
         <input type="text" class="boardBtn" id="txtText" placeholder="Enter text here" />
         <button class="boardBtn txtFontStyle" data-value="bold" title="Bold"><i class="fa fa-bold"></i></button>
