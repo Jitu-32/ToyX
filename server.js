@@ -1,3 +1,6 @@
+//
+require('dotenv').config();
+
 var express = require('express');
 var ejs = require('ejs');
 var port = process.env.PORT || 3000;
@@ -16,7 +19,7 @@ const Blog = require('./models/Blog');
 
 
 
-mongoose.connect('mongodb://localhost/ManualAuth',{
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ManualAuth',{
 
   useNewUrlParser: true,
   useUnifiedTopology: true,
