@@ -66,6 +66,8 @@ app.use(methodOverride('_method'));
 
 
 app.use(express.static(__dirname + '/views'));
+app.use(express.static("static"));
+app.use(express.static("public"));
 
 var index = require('./routes/index');
 app.use('/', index);

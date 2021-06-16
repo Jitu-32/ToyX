@@ -10,126 +10,279 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/templatemo-art-factory.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/owl-carousel.css">
+
     <title>Home</title>
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-
-        <div class="container-fluid">
-            <a class="navbar-brand" href="home">
-              <img src="images/bg.png" width="30" height="24" class="d-inline-block align-top">
-              <b>DOODLE 4RCE</b>
-            </a>
+        <!-- ***** Preloader Start ***** -->
+        <div id="preloader">
+          <div class="jumper">
+              <div></div>
+              <div></div>
+              <div></div>
           </div>
-
-          <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">:)</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home"><b>HOME</b></a>
-                      </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="login"><b>PLAY</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="community"><b>COMMUNITY</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="contact"><b>CONTACT</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="drawboard"><b>DRAW</b></a>
-                  </li>
-                </ul>
-                <span class="navbar-text">
-                  THINK * CREATE * DOODLE
-                </span>
+      </div>  
+      <!-- ***** Preloader End ***** -->
+      
+      
+      <!-- ***** Header Area Start ***** -->
+      <header class="header-area header-sticky">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <nav class="main-nav">
+                          <!-- ***** Logo Start ***** -->
+                          <a href="#" class="logo">ToyX</a>
+                          <!-- ***** Logo End ***** -->
+                          <!-- ***** Menu Start ***** -->
+                          <ul class="nav">
+                              <li class="scroll-to-section"><a href="/home"><i class="fa fa-home" aria-hidden="true"></i> &nbsp;HOME</a></li>
+                              <li class="scroll-to-section"><a href="/login"><i class="fa fa-gamepad" aria-hidden="true"></i> &nbsp;PLAY</a></li>
+                              <li class="scroll-to-section"><a href="/community"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;COMMUNITY</a></li>
+                              <li class="scroll-to-section"><a href="/contact"><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;CONTACT</a></li>
+                              <li class="scroll-to-section"><a href="/drawboard"><i class="fa fa-paint-brush" aria-hidden="true"></i> &nbsp;DRAW</a></li>
+                              <!-- <li class="scroll-to-section"><a href="/sessionLogout"><b><i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp; Logout</b></a></li> -->
+                          </ul>
+                          <a class='menu-trigger'>
+                              <span>Menu</span>
+                          </a>
+                          <!-- ***** Menu End ***** -->
+                      </nav>
+                  </div>
               </div>
-            </div>
-          <!-- </nav> -->
-      </nav>
-
-      <section class="h-100">
-        <div class="position-absolute h-100 w-100" style="
-                z-index: -1;
-                /* background-image: url('images/back.jpg'); */
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
-                background-position: center;
-            "></div>
-
-            <div class="container h-100 py-5">
-              <div class="d-flex justify-content-center align-items-center mb-3">
-                <div class="col-sm-8 text-center">
-                    
-                  <h5>Ready For Doodle War !!</h5>
-                  <h1 class="font-weight-bold">
-                      THINK • CREATE • DOODLE
-                  </h1>
-                  <h5 class="text-muted font-weight-normal">
-                      An online interactive multiplayer doodling game
-                  </h5>
-                  <div class="">
-                      <div class="btn btn btn-info">
-                          <!-- Subscribe now -->
+          </div>
+      </header>
+      <!-- ***** Header Area End ***** -->
+  
+  
+      <nav class="navbar py-0 navbar-expand-lg navbar-dark bg-info">
+      <!-- ***** Welcome Area Start ***** -->
+      <div class="welcome-area" id="welcome">
+  
+          <!-- ***** Header Text Start ***** -->
+          <div class="header-text">
+              <div class="container">
+                  <div class="row">
+                      <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                          <h1><strong>DOODLE 4RCE</strong></h1>
+                          <p>Competitive doodling platform where doodlers and learners from different age groups can connect with each other and face a doodling challenge.
+                            A Doodle community where the users can present their doodles, post them on social media sites, and get featured on the platform.
+                          </p>
+                          <a href="#playgame" class="main-button-slider">PLAY NOW</a> &nbsp; &nbsp;
+                          <a href="#about" class="main-button-slider">How to play ?</a> &nbsp; &nbsp;
                       </div>
-                      <div class="btn btn ml-3 btn-outline-info">
-                          <!-- Learn more -->
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                          <img src="../assets/images/draw.png" class="rounded img-fluid d-block mx-auto" alt="First Vector Graphic">
                       </div>
                   </div>
-                </div>
-                </div>
-            </div>
+              </div>
+          </div>
+          <!-- ***** Header Text End ***** -->
+      </div>
+      <!-- ***** Welcome Area End ***** -->
+  </nav>
+
+  <section class="h-100" id="playgame">
+    <div class="position-absolute h-100 w-100" style="
+    z-index: -1;
+    /* background-image: url('images/back.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+"></div>
+
+<div class="container h-100 py-5">
+  <div class="d-flex justify-content-center align-items-center mb-3">
+    <div class="col-sm-8 text-center">
+        
+      <h5>Ready For Doodle War !!</h5>
+      <h1 class="font-weight-bold">
+          THINK • CREATE • DOODLE
+      </h1>
+      <h5 class="text-muted font-weight-normal">
+          An online interactive multiplayer doodling game
+      </h5>
+      <div class="">
+          <div class="btn btn btn-info">
+              <!-- Subscribe now -->
+          </div>
+          <div class="btn btn ml-3 btn-outline-info">
+              <!-- Learn more -->
+          </div>
+      </div>
     </div>
-    </section>
-      
-      <div class="col d-flex justify-content-center">
+    </div>
+</div>
+</div>
 
-        <!-- spacing -->
-        <div class="mt-4" />
 
-        <a href="login" class="custom-card">
-          <div class="card" style="width: 15rem; display: inline-block">
-            <img class="card-img-top" src="images/doo1.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">WORD DOODLE</h5>
-              <p class="card-text">Doodling on the basis of keyword/hints [Same for all]</p>
-            </div>
+<div class="col d-flex justify-content-center">
+
+  <!-- spacing -->
+  <!-- <div class="mt-4" /> -->
+
+  <a href="login" class="custom-card">
+    <div class="card" style="width: 15rem; display: inline-block">
+      <img class="card-img-top" src="../assets/images/word.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">WORD DOODLE</h5>
+        <p class="card-text">Doodling on the basis of keyword/hints [Same for all]</p>
+      </div>
+    </div>
+  </a>
+  
+  &nbsp; &nbsp; &nbsp;
+
+  <a href="login" class="custom-card">
+    <div class="card" style="width: 15rem; display: inline-block">
+      <img class="card-img-top" src="../assets/images/picture.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">PICTURE DOODLE</h5>
+        <p class="card-text">Each player has to doodle given picture</p>
+      </div>
+    </div>
+  </a>
+
+  &nbsp; &nbsp; &nbsp;
+
+  <a href="login" class="custom-card">
+    <div class="card" style="width: 15rem; display: inline-block">
+      <img class="card-img-top" src="../assets/images/guess.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">GUESS DOODLE</h5>
+        <p class="card-text">A player draws the doodle and others guess the word.</p>
+      </div>
+    </div>
+  </a>
+</div>   
+</section>
+
+
+
+    <!-- ***** Features Big Item Start ***** -->
+    <section class="section" id="about">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-7 col-md-12 col-sm-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                  <img src="assets/images/slider-icon.png" class="rounded img-fluid d-block mx-auto" alt="App">
+              </div>
+              <div class="right-text col-lg-5 col-md-12 col-sm-12 mobile-top-fix">
+                  <div class="left-heading">
+                      <h5>HOW TO PLAY ?</h5>
+                  </div>
+                  <div class="left-text">
+                      <p>• Choose game mode </br>
+                        • Create or Join room </br>
+                        • Doodle war started !!
+                      </p>
+                      <a href="#about2" class="main-button">Features</a> &nbsp; &nbsp;
+                      <a href="#playgame" class="main-button">Play</a>
+                  </div>
+              </div>
           </div>
-        </a>
-
-        <a href="login" class="custom-card">
-          <div class="card" style="width: 15rem; display: inline-block">
-            <img class="card-img-top" src="images/doo3.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">PICTURE DOODLE</h5>
-              <p class="card-text">Each player has to doodle given picture</p>
-            </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="hr"></div>
+              </div>
           </div>
-        </a>
+      </div>
+  </section>
+  <!-- ***** Features Big Item End ***** -->
 
-        <a href="login" class="custom-card">
-          <div class="card" style="width: 15rem; display: inline-block">
-            <img class="card-img-top" src="images/doo2.jpg" height="160px" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">GUESS DOODLE</h5>
-              <p class="card-text">A player draws the doodle and others guess the word.</p>
-            </div>
+
+  <!-- ***** Features Big Item Start ***** -->
+  <section class="section" id="about2">
+      <div class="container">
+          <div class="row">
+              <div class="left-text col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix">
+                  <div class="left-heading">
+                      <h5>GAME FEATURES</h5>
+                  </div>
+                  <p>Game is available in 3 modes !!</p>
+                  <ul>
+                      <li>
+                          <img src="assets/images/about-icon-01.png" height="50px" width="50px" alt="">
+                          <div class="text">
+                              <h6>Word Doodle</h6>
+                              <p>Doodling on the basis of keyword/hints [Same for all]</p>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="assets/images/about-icon-02.png" height="50px" width="50px" alt="">
+                          <div class="text">
+                              <h6>Picture Doodle</h6>
+                              <p>Each player has to doodle given picture</p>
+                          </div>
+                      </li>
+                      <li>
+                          <img src="assets/images/about-icon-03.png" height="50px" width="50px" alt="">
+                          <div class="text">
+                              <h6>Guess Doodle</h6>
+                              <p>A player draws the doodle and others guess the word.</p>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+              <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
+                  <img src="assets/images/right-image.png" class="rounded img-fluid d-block mx-auto" alt="App">
+              </div>
           </div>
-        </a>
-    </div>    
+      </div>
+  </section>
+  <!-- ***** Features Big Item End ***** -->
+
+  
+  <!-- ***** Footer Start ***** -->
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-7 col-md-12 col-sm-12">
+                  <p class="copyright">Copyright &copy; ToyX
+              </div>
+              <div class="col-lg-5 col-md-12 col-sm-12">
+                  <ul class="social">
+                      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                      <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                      <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
       crossorigin="anonymous"
     ></script>
+
+        
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="../assets/js/popper.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="../assets/js/owl-carousel.js"></script>
+    <script src="../assets/js/scrollreveal.min.js"></script>
+    <script src="../assets/js/waypoints.min.js"></script>
+    <script src="../assets/js/jquery.counterup.min.js"></script>
+    <script src="../assets/js/imgfix.min.js"></script> 
+    
+    <!-- Global Init -->
+    <script src="../assets/js/custom.js"></script>
+    
   </body>
 </html>
