@@ -1,82 +1,134 @@
+/* Basic styles
+  ======================================= */
+  * {
+    box-sizing: border-box;
+}
+
 body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    color: #555;
+    /* background: #ecf0f3; */
+    background: url(../images/back.jpg) center;
+    overflow: hidden;
+
+}
+/* Form styles
+  ======================================= */
+.form {
+    width: 400px;
+    height: 600px;
+    padding: 60px 35px 35px;
+    border-radius: 40px;
+    background: #ecf0f3;
+    box-shadow: 13px 13px 20px #659edb, -13px -13px 20px #659edb;
+}
+
+.form__logo {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: url(../assets/images/draw.png) no-repeat center/cover;
+    box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 5px #ecf0f3, 8px 8px 15px #a7aaaf, -8px -8px 15px #ffffff;
+}
+
+.form__title {
+    padding-top: 24px;
+    margin: 0;
     text-align: center;
+    font-size: 28px;
+    letter-spacing: 0.5px;
 }
 
-#background {
-    position: absolute;
-    z-index: -1;
-    opacity: 0.7;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/bg.png');
-    background-size: cover;
-}
-
-.title {
-    margin-top: 50px;
-    color: #373737;
-    font-size: 70px;
-    font-family: cursive;
-    font-weight: bolder;
-}
-
-.subtitle {
-    color: #373737;
-    font-size: 20px;
-    font-family: sans-serif;
-    font-weight: normal;
-}
-
-input {
-    border-style: solid;
-    border-width: 2px;
-    border-color:rgb(59, 129, 187);
-    border-radius: 5px;
-    outline: none;
-    padding: 10px;
-    margin: 20px;
-    width: 500px;
-    color: rgb(69, 67, 216);
-    font-family: cursive;
+.form__subtitle {
+    padding-top: 7px;
+    margin: 0;
     text-align: center;
     font-size: 15px;
-    background-color: transparent;
+    letter-spacing: 3px;
+}
+/* Fields styles
+  ======================================= */
+.form__fields {
+    width: 100%;
+    padding: 25px 5px 5px;
 }
 
-.btn {
+.form__fields input {
+    padding: 20px 10px 20px 5px;
+    font-size: 18px;
+    color: #555555;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    background: none;
+}
+
+.form__username,
+.form__password {
+    margin-bottom: 30px;
+    border-radius: 25px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
+.form__fields svg {
+    height: 27px;
+    padding-top: 10px;
+    margin: 0 10px -3px 25px;
+    fill: #999;
+}
+/* Button styles
+  ======================================= */
+.form__signin-button {
+    width: 100%;
+    height: 60px;
+    font-family: "Lato", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #24cfaa;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    margin-bottom: 20px;
     cursor: pointer;
-    border-style: solid;
-    border-width: 2px;
-    border-color: saddlebrown;
-    border-radius: 5px;
-    outline: none;
-    background-color: transparent;
-    color: saddlebrown;
-    font-size: 17px;
-    padding: 10px;
-    margin: 5px;
-    margin-top: 20px;
-    opacity: 0.9;
+    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+    transition: 0.5s;
 }
 
-.btn:hover {
-    background-color: rgb(17, 42, 122);
-    color: white;
-    opacity: 0.6;
+.form__signin-button:hover {
+    background: #2fdbb6;
 }
 
-.errorBox {
-    outline: none;
-    border-style: solid;
-    border-color: rgb(97, 207, 33);
-    border-width: 2px;
-    min-width: 300px;
-    padding: 10px;
-    opacity: 0.9;
-    font-family: cursive;
-    color: white;
-    /* background-color: rgb(247, 240, 240); */
+.form__signin-button:active {
+    background: #1da88a;
+}
+/* Links styles
+  ======================================= */
+.form__links {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.form__links a {
+    font-size: 15px;
+    color: #aaa;
+    text-decoration: none;
+}
+
+.abtn {
+    font: 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border: 2px solid rgb(51, 47, 47);
     border-radius: 5px;
 }
+
