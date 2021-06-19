@@ -1085,7 +1085,7 @@
         }
 
         loadJS('chat', function () {
-            chat.maximize();
+            chat.minimize();
         });
         loadJS('realtime', function () {
             rtMan.createSocket();
