@@ -132,22 +132,6 @@ app.get('/video', function (req, res) {
     res.render('video_call');
   });
 
-app.post('/battleground', function (req, res) {
-
-  var roomname = req.body.roomname;
-  var username = req.body.username;
-
-    if (roomname.indexOf(' ') > -1 || roomname.length === 0) {
-        res.render('login', {
-            visibility: 'visible',
-            msg: 'Invalid Roomname'
-        });
-    } else {
-
-        res.render('index', {
-            roomname: roomname,
-            username: username
-        });
 
 app.get('/profile', function (req, res) {
 
