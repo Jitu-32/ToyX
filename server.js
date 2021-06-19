@@ -135,6 +135,11 @@ app.get('/drawboard', function (req, res) {
   res.render('drawboard');
 });
 
+// video_call
+app.get('/video', function (req, res) {
+    res.render('video_call');
+  });
+
 app.post('/battleground', function (req, res) {
 
   var roomname = req.body.roomname;
