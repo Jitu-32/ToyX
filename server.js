@@ -107,8 +107,8 @@ app.use('/blogs', blogRouter);
 
 
 ///aman
-app.get('/login', function (req, res) {
-  res.render('login', {
+app.get('/battleground', function (req, res) {
+  res.render('battleground', {
       visibility: 'hidden',
       msg: null
   });
@@ -135,7 +135,7 @@ app.get('/drawboard', function (req, res) {
   res.render('drawboard');
 });
 
-app.post('/login', function (req, res) {
+app.post('/battleground', function (req, res) {
 
   var roomname = req.body.roomname;
   var username = req.body.username;
