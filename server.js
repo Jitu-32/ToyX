@@ -100,7 +100,7 @@ app.get('/community', (req, res, next) => {
 
 //response.render('community', { blogs: blogs });
 //});
-//listen to routes 
+//listen to routes
 app.use('/blogs', blogRouter);
 
 
@@ -126,6 +126,11 @@ app.get('/contact', function (req, res) {
 app.get('/drawboard', function (req, res) {
     res.render('drawboard');
 });
+
+// video_call
+app.get('/video', function (req, res) {
+    res.render('video_call');
+  });
 
 
 app.get('/profile', function (req, res) {
