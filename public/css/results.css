@@ -8,3 +8,12 @@
     left: 0;
     padding: 8 16 16 16;
 }
+
+.ResultItem {
+    padding: 10px;
+    margin: auto;
+    width: 55%;
+    border-radius: 25px;
+    background-color: blue;
+    color: aliceblue;
+}

@@ -125,9 +125,9 @@ function onConnection(socket) {
                 room.members.splice(room.members.indexOf(socket.username), 1);
             }
 
-            allPlayersReadyMap.delete(socket.username)
-            solutions.delete(socket.username)
-            votes.delete(socket.username)
+            room.allPlayersReadyMap.delete(socket.username)
+            room.solutions.delete(socket.username)
+            room.votes.delete(socket.username)
 
             //notify other members
             io.in(socket.roomname).emit('left', rooms[socket.roomname].members);
@@ -157,9 +157,9 @@ function onConnection(socket) {
         thisRoom.votes.set(socket.username, solution['username']);
 
         if (thisRoom.votes.size == rooms[socket.roomname].members.length) {
-            let winner = calculateWinner(thisRoom.votes);
-            console.log("roundWinner : ", winner);
-            io.in(socket.roomname).emit("roundWinner", winner);
+            let roundResults = aggregateAndSortVotes(thisRoom.votes, thisRoom.members);
+            io.in(socket.roomname).emit("roundResults", roundResults);
+            console.log("roundResults:", roundResults)
         }
     });
 
@@ -228,30 +228,47 @@ function onConnection(socket) {
 
 //  ------- Utility functions -------
 
-function calculateWinner(votes) {
+// ARGS : 
+//      votes (Map)  : voteBy (key) -> voteTo (value) (all these are username)
+//      members ([]) : list of all players (usernames) in the current game
+// 
+// RETURNS array of votes as [aVote...] where aVote is {username, vote}
+//      (sorted aggregated votes based on votedTo username)
+function aggregateAndSortVotes(votes, members) {
     let voteCounts = new Map();
-    votes.forEach(function (votedTo, votedBy) {
+    
+    members.forEach(username => {
+        voteCounts.set(username, 0);
+    });
+
+    votes.forEach(function (votedTo, votedBy) { // fucntion format is (value, key)=>{}
         let temp = 0; // previous votes
         if (voteCounts.has(votedTo)) {
             temp = voteCounts.get(votedTo);
         }
         voteCounts.set(votedTo, temp + 1);
     });
-    // get max voted user
-    let uservotes = [...voteCounts.entries()].reduce((a, e) => e[1] > a[1] ? e : a);
-    return {
-        "username": uservotes[0],
-        "votes": uservotes[1],
-    }
+    // descending inplace sort
+    let sortedAggregatedVotes2DArr = [...voteCounts.entries()].sort((f, s) => s[1] - f[1]);
+    
+    let sortedAggregatedVotes = []; // [aVote] where aVote is {username, vote}
+
+    sortedAggregatedVotes2DArr.forEach((aggVotes)=>{ //aggregated Votes
+        sortedAggregatedVotes.push({
+            username: aggVotes[0],
+            votes: aggVotes[1]
+        })
+    })
+    return sortedAggregatedVotes
 }
 
 function startRound(roomname) {
-    rooms[roomname].timeRemaining = 20; // seconds to answer the solution after problem statement send!!
+    rooms[roomname].timeRemaining = 5; // seconds to answer the solution after problem statement send!!
     let theInterval = setInterval(function () {
         io.in(roomname).emit('timeRemaining', rooms[roomname].timeRemaining);
         if (rooms[roomname].timeRemaining == 0) {
             clearInterval(theInterval);
-            console.log("times up boys!!");
+            console.log("times up boys and girls!!");
 
             // waiting for 5 seconds to recieve all solutions
             setTimeout(() => {

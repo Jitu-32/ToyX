@@ -50,7 +50,7 @@
 
                 chat.members = data.members;
                 $("#chatMembers").text("Chat : " + chat.members.length);
-                
+
                 rtMan.socket.emit("isPlayerReady", thisUserReady);
             });
 
@@ -59,20 +59,20 @@
                 $("#chatMembers").text("Chat : " + chat.members.length);
             });
 
-            rtMan.socket.on('startVoting', function(solutions){
-                console.log("show overlay!; show solutions:",solutions);
+            rtMan.socket.on('startVoting', function (solutions) {
+                console.log("show overlay!; show solutions:", solutions);
                 $(".VotingWidget").get()[0].style.display = "block";
                 $(".ProgressCircle").hide();
                 $(".VoteItemContainer").show();
 
                 let voteItemContainer = $(".VoteItemContainer").get()[0];
-                solutions.forEach(aSolution => {                    
+                solutions.forEach(aSolution => {
                     let imgElm = document.createElement("img");
                     imgElm.setAttribute("src", aSolution['imageUrl']);
                     imgElm.style.height = "100";
                     imgElm.style.width = "100%";
                     imgElm.alt = "solution";
-                    
+
                     let usernameElm = document.createElement("p");
                     usernameElm.innerText = aSolution['username'];
 
@@ -81,22 +81,22 @@
 
                     voteItem.appendChild(imgElm);
                     voteItem.appendChild(usernameElm);
-                    voteItem.onclick = function(ev){
+                    voteItem.onclick = function (ev) {
                         rtMan.socket.emit("votedSolution", {
-                            username : aSolution['username'],
+                            username: aSolution['username'],
                         });
                         $(".VoteItemContainer").hide();
                     };
 
                     voteItemContainer.appendChild(voteItem);
                 });
-                
+
             });
 
-            rtMan.socket.on('timeRemaining', function(seconds){
+            rtMan.socket.on('timeRemaining', function (seconds) {
                 // console.log('timeRemaining :', seconds);
                 $('#roundFinishingTime').html("Time remaining: " + seconds + " seconds");
-                if(seconds == 0){
+                if (seconds == 0) {
                     // disable drawing now and send the solution!
                     $(".VotingWidget").get()[0].style.display = "block";
                     $(".ProgressCircle").show();
@@ -107,64 +107,78 @@
                     };
                     console.log("solution emitted by this user:", thisSolution);
                     rtMan.socket.emit("solution", thisSolution);
-                }                
+                }
             });
 
-            rtMan.socket.on('updatePlayersList', function(allPlayersReadyList){
+            rtMan.socket.on('updatePlayersList', function (allPlayersReadyList) {
                 console.log("updatePlayersList:", allPlayersReadyList);
-                
+
                 //refreshing all playerslist
                 let playersJoinedList = $("#playersJoinedList").get()[0];
                 playersJoinedList.replaceChildren();
-                
+
                 let allReady = true;
-                for(let i=0; i<allPlayersReadyList.length; ++i){
+                for (let i = 0; i < allPlayersReadyList.length; ++i) {
                     let username = allPlayersReadyList[i][0];
                     let isReady = allPlayersReadyList[i][1];
 
                     console.log("issue:", username, isReady);
                     let playerElm = document.createElement("p");
-                    let isready_str = isReady? "ready" : "not ready";
+                    let isready_str = isReady ? "ready" : "not ready";
                     playerElm.innerText = username + " is " + isready_str;
                     playerElm.style.color = "#FFF";
                     playersJoinedList.appendChild(playerElm);
 
                     allReady = allReady && isReady;
                 }
-                if(!allReady){
+                if (!allReady) {
                     $('#lobbyWaitingTime').html("");
                 }
             });
 
             let thisUserReady = false;
-            $("#startRoundButton").on("click", function(){
+            $("#startRoundButton").on("click", function () {
                 // emit I am ready!
                 thisUserReady = !thisUserReady;
                 rtMan.socket.emit("isPlayerReady", thisUserReady);
 
-                if(thisUserReady)
+                if (thisUserReady)
                     $("#startRoundButton").html("I'm Not Ready!");
-                else 
+                else
                     $("#startRoundButton").html("I'm Ready!");
             });
-            
 
-            rtMan.socket.on('roundStartTimeRemaining', function(seconds){
-                $('#lobbyWaitingTime').html("Starting in "+seconds);
-            });
-
-            rtMan.socket.on('startRound', function(data) {
-                $('.LobbyWidget').hide();
-                console.log("startRound: "+JSON.stringify(data));
-                //todo: display problem statement in problem statement area!
-                $('#problemStatement').text("title: " + data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
+            $("backToLoginButton").on('click', function () {
+                // lets restart the game for all users!
+                window.location.href = window.location.href;
             })
 
-            rtMan.socket.on('roundWinner', function(winner) {
+
+            rtMan.socket.on('roundStartTimeRemaining', function (seconds) {
+                $('#lobbyWaitingTime').html("Starting in " + seconds);
+            });
+
+            rtMan.socket.on('startRound', function (data) {
+                $('.LobbyWidget').hide();
+                console.log("startRound: " + JSON.stringify(data));
+                //todo: display problem statement in problem statement area!
+                $('#problemStatement').text("title: " + data.problemStatement.title + "\ndesc: " + data.problemStatement.desc)
+            })
+
+            rtMan.socket.on('roundResults', function (roundResults) {
                 $('.VotingWidget').hide();
                 $('.ResultsWidget').show();
-                console.log("winner: ", winner);
-                $('#winnerUserName').html("#1:    " + winner.username + " got " + winner.votes +" vote(s)");
+                console.log("roundResults: ", roundResults);
+
+                let resultItemContainer = $(".ResultItemContainer").get()[0];
+                roundResults.forEach((aResult, i) => {
+                    let h2Elm = document.createElement("h2");
+                    h2Elm.innerText = "#" + (i + 1) + ":    " + aResult.username + " got " + aResult.votes + " vote(s)";
+                    h2Elm.setAttribute("class", "card ResultItem");
+
+                    resultItemContainer.appendChild(h2Elm);
+                });
+
             })
 
         },
@@ -192,102 +206,102 @@
 
             switch (data.type) {
 
-            case 'line':
-                board.drawer.line(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
-                break;
+                case 'line':
+                    board.drawer.line(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
+                    break;
 
-            case 'rectangle':
-                board.drawer.rect(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'rectangle':
+                    board.drawer.rect(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'ellipse':
-                board.drawer.ellipse(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'ellipse':
+                    board.drawer.ellipse(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'triangle':
-                board.drawer.triangle(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'triangle':
+                    board.drawer.triangle(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'star':
-                board.drawer.star(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'star':
+                    board.drawer.star(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'moon':
-                board.drawer.moon(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'moon':
+                    board.drawer.moon(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'love':
-                board.drawer.love(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
-                break;
+                case 'love':
+                    board.drawer.love(board.ctx, socketData.x, socketData.y, socketData.w, socketData.h);
+                    break;
 
-            case 'circle':
-                board.drawer.circle(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
-                break;
+                case 'circle':
+                    board.drawer.circle(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
+                    break;
 
-            case 'arrow':
-                board.drawer.arrow(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
-                break;
+                case 'arrow':
+                    board.drawer.arrow(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
+                    break;
 
-            case 'face':
-                board.drawer.face(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
-                break;
+                case 'face':
+                    board.drawer.face(board.ctx, socketData.x1, socketData.y1, socketData.x2, socketData.y2);
+                    break;
 
-            case 'text':
-                board.drawer.text(board.ctx, socketData.text, socketData.x, socketData.y);
-                break;
+                case 'text':
+                    board.drawer.text(board.ctx, socketData.text, socketData.x, socketData.y);
+                    break;
 
-            case 'pencil':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.pencil(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y);
-                }
-                break;
+                case 'pencil':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.pencil(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y);
+                    }
+                    break;
 
-            case 'marker':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.marker(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.size, socketData.strokeStyle);
-                }
-                break;
+                case 'marker':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.marker(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.size, socketData.strokeStyle);
+                    }
+                    break;
 
-            case 'chalk':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.chalk(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.size);
-                }
-                break;
+                case 'chalk':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.chalk(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.size);
+                    }
+                    break;
 
-            case 'spray':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.spray(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.size);
-                }
-                break;
+                case 'spray':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.spray(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.size);
+                    }
+                    break;
 
-            case 'doubleBrush':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.doubleBrush(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.offset);
-                }
-                break;
+                case 'doubleBrush':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.doubleBrush(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y, socketData.offset);
+                    }
+                    break;
 
-            case 'circleBrush':
-                for (i = socketData.points.length - 2; i >= 0; i--) {
-                    board.drawer.circleBrush(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y);
-                }
-                break;
+                case 'circleBrush':
+                    for (i = socketData.points.length - 2; i >= 0; i--) {
+                        board.drawer.circleBrush(board.ctx, socketData.points[i].x, socketData.points[i].y, socketData.points[i + 1].x, socketData.points[i + 1].y);
+                    }
+                    break;
 
-            case 'eraser':
-                for (i = socketData.points.length - 1; i >= 0; i--) {
-                    board.ctx.beginPath();
-                    board.ctx.fillStyle = $("#canvas").css('background-color');
-                    board.ctx.arc(socketData.points[i].x, socketData.points[i].y, socketData.size, 0, 2 * Math.PI);
-                    board.ctx.fill();
-                }
-                break;
+                case 'eraser':
+                    for (i = socketData.points.length - 1; i >= 0; i--) {
+                        board.ctx.beginPath();
+                        board.ctx.fillStyle = $("#canvas").css('background-color');
+                        board.ctx.arc(socketData.points[i].x, socketData.points[i].y, socketData.size, 0, 2 * Math.PI);
+                        board.ctx.fill();
+                    }
+                    break;
 
-            case 'clear':
-                board.drawer.clear(board.ctx);
-                board.drawer.clear(board.lctx);
-                break;
+                case 'clear':
+                    board.drawer.clear(board.ctx);
+                    board.drawer.clear(board.lctx);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
 
 
