@@ -1085,9 +1085,9 @@
         }
 
         loadJS('chat', function () {
-            chat.minimize();
+            chat.maximize();
         });
-        loadJS('battleground', function () {
+        loadJS('realtime', function () {
             rtMan.createSocket();
             rtMan.socket.emit('coming', {
                 roomname: rtMan.roomname,

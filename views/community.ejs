@@ -1,159 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-    <meta charset="utf-8" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-      crossorigin="anonymous"
-    />
-    <title>Home</title>
-  </head>
-  <body>
 
-    <nav class="navbar py-0 navbar-expand-lg navbar-dark bg-info">
+<head>
 
-        <div class="container-fluid">
-            <a class="navbar-brand" href="home">
-              <img src="images/bg.png" width="30" height="24" class="d-inline-block align-top">
-              <b>DOODLE 4RCE</b>
-            </a>
-          </div>
+  <meta charset="utf-8" />
 
-          <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">:)</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="home"><b>HOME</b></a>
-                      </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="battleground"
-><b>PLAY</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="community"><b>COMMUNITY</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="profile"><b>PROFILE</b></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="contact"><b>CONTACT</b></a>
-                  </li>
-                </ul>
-                <span class="navbar-text">
-                  <!-- THINK * CREATE * DOODLE -->
-                <a class="nav-link" aria-current="page" href="/logout"><b> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout</b></a>
-                </span>
-                <!-- <a class="nav-link" aria-current="page" href="/logout"><b>Logout</b></a> -->
-                <!-- <a class="btn btn-primary" href="/logout" role="button">Logout</a> -->
-              </div>
-            </div>
-          <!-- </nav> -->
-      </nav>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+  <title>Home</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-      <!-- <div class="abc">
+  /* body,
+    html {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: orange;
+    } */
+    body,html{
+      background-image: url("back.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  .wrapper {
+    align-items: center;
+    margin: 13px 7px;
+    display: inline-flex;
+    width: 18.5%;
+    justify-content: space-around;
+  }
+
+
+  .card {
+    border: 4px solid black;
+    width: 261px;
+    height: 287px;
+    border-radius: 18px;
+    padding: 0.5rem;
+    background: black;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 5px 7px 10px rgb(0 0 0 /50%);
+  }
+
+ 
+
+  div:hover .card {
+    transform: translateY(20px);
+  }
+
+  div:hover .card::before {
+    opacity: 1;
+  }
+
+  div:hover .card .info {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+  }
+
+
+
+  .card .info {
+    position: relative;
+    z-index: 3;
+    color: white;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+  }
+
+  .card .info h1 {
+    margin: 0px;
+  }
+
+  .card .info p {
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+  .card .info button {
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
+  }
+
+  .card .info button:hover {
+    background: dodgerblue;
+    color: white;
+  }
+</style>
+
+<body>
+
+  <nav class="navbar py-0 navbar-expand-lg navbar-dark bg-info">
+
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home">
+        <img src="images/bg.png" width="30" height="24" class="d-inline-block align-top">
+        <b>DOODLE 4RCE</b>
+      </a>
+    </div>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">:)</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="home"><b>HOME</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="battleground"><b>PLAY</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="community"><b>COMMUNITY</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="profile"><b>PROFILE</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="contact"><b>CONTACT</b></a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <!-- THINK * CREATE * DOODLE -->
+          <a class="nav-link" aria-current="page" href="/logout"><b> <i class="fa fa-sign-out" aria-hidden="true"></i>
+              &nbsp; Logout</b></a>
+        </span>
+        <!-- <a class="nav-link" aria-current="page" href="/logout"><b>Logout</b></a> -->
+        <!-- <a class="btn btn-primary" href="/logout" role="button">Logout</a> -->
+      </div>
+    </div>
+    <!-- </nav> -->
+  </nav>
+
+  <!-- <div class="abc">
         <a href="/logout">Logout</a>
       </div> -->
+      <a style = "margin: 31px 639px;" class="btn btn-dark" href="blogs/new" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" 
+        style = "width: 47px;
+        vertical-align: middle;
+        height: 42px;">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 
+      </svg>
+        </a>
+        <br>     
 
-      <div class="container">
-        <div class="m-4 text-center">
-            <!-- <img src="/images/logo.svg" alt="">
-            <p class="text-white">Lifestyle | Fashion | Travel</p> -->
+        <% if(blogs.length<1){%>
 
-        </div>
-        <!-- <div class="row mb-3"> -->
-          <a class="btn btn-primary" href="blogs/new" role="button"><i class="fa fa-plus-circle"></i>
-            Create a doodle post</a>
-            <!-- <a href="blogs/new"> <i class="fa fa-plus-circle"></i>
-                Create a doodle post</a> -->
-        <!-- </div>    -->
-
-        <div class="row">
-
-            <% if(blogs.length<1){%>
-
-            <p class="text-white">No posts yet, create a new one</p>
-
-            <%  } %>
-
-
-            <% blogs.forEach(blog=>{ %>
-
-
-            <div class="col-lg-6 card mt-2 mr-0">
-                <div class="row p-2">
-
-                    <div class="col-5 overflow-hidden">
-                        <img src="/uploads/images/<%= blog.img %>" class="card-img" alt="...">
-
-                    </div>
-
-                    <div class="col-7">
-                        <div class="d-flex align-items-start">
-                            <h5 class="w-100"><b> <%= blog.title %> </b></h5>
-
-                            <!-- display more button -->
-                            
-                        </div>
-
-                        <span class="align-self-stretch "><%= blog.snippet %>
-
-                        </span>
-                        <div class="d-flex align-items-end">
-                            <!-- <div class="mr-2">
-                                <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
-                                    style="width: 40px; height: 40px;">
-                            </div> -->
-                            <div class=" flex-grow-1">
-                                <h5 class="" style="font-size: 14px; line-height: 0.5rem;">
-                                    <span><b><%= blog.author%></b></span></h5>
-
-                                <p style="font-size: 8px; line-height: 0.2rem;">
-                                    <%= blog.timeCreated.toLocaleDateString() %></p>
-                            </div>
-                            
-                            <!-- enlarged photo mae 3 dots hatani hai... -->
-                            <a href="blogs/<%=blog.slug %> " class=" align-self-end">
-                              <i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share
-                            </a>
-                        </div>
-                        
-                        <div class="d-flex align-items-start">
-                          <h5 class="w-100"><b> <%= blog.description %> </b></h5>
-                      </div>
-
-                    </div>
+          <p class="text-white">No posts yet, create a new one</p>
+      
+          <%  } %>
+          
+          
+          <% blogs.forEach(blog=>{ %>
+            <div class="wrapper">
+              <div class="card">
+                <img
+                  src="/uploads/images/<%= blog.img %>"
+                  alt="none">
+                <div class="info">
+                  <h1><%= blog.title %></h1>
+                  <%= blog.description %>
+                  <button>Read More</button>
                 </div>
-
+              </div>
             </div>
 
 
             <% }) %>
+  
+ 
+  <div class="container">
+    <div class="m-4 text-center">
+      <!-- <img src="/images/logo.svg" alt="">
+            <p class="text-white">Lifestyle | Fashion | Travel</p> -->
+
+    </div>
+    <!-- <div class="row mb-3"> -->
+    
+    <!-- <a href="blogs/new"> <i class="fa fa-plus-circle"></i>
+                Create a doodle post</a> -->
+    <!-- </div>    -->
+
+
+    <script src="/js/index.js"></script>
 
 
 
-
-        </div>
-        <script src="/js/index.js"></script>
-
-
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+      crossorigin="anonymous"></script>
+</body>
+
 </html>
