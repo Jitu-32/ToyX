@@ -150,9 +150,10 @@
                     $("#startRoundButton").html("I'm Ready!");
             });
 
-            $("backToLoginButton").on('click', function () {
-                // lets restart the game for all users!
-                window.location.href = window.location.href;
+            $("#backToLoginButton").on('click', function () {
+                // go back to login page
+                window.allowGoBack = true;
+                window.location.href = "/battleground";
             })
 
 
