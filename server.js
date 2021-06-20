@@ -127,11 +127,26 @@ app.get('/drawboard', function (req, res) {
     res.render('drawboard');
 });
 
-// video_call
-app.get('/video', function (req, res) {
-    res.render('video_call');
+// video_landing
+app.get('/experts', function (req, res) {
+    res.render('expert_landing');
   });
 
+// room1
+app.get('/expert_session1', function (req, res) {
+    res.render('room1');
+  });
+
+// room 2
+  app.get('/expert_session2', function (req, res) {
+    res.render('room2');
+  });
+
+// room 3
+
+app.get('/expert_session3', function (req, res) {
+    res.render('room3');
+  });  
 
 app.get('/profile', function (req, res) {
 
