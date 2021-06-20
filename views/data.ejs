@@ -1,0 +1,73 @@
+<div class="row">
+
+    <% if(blogs.length<1){%>
+
+    <p class="text-white">No posts yet, create a new one</p>
+
+    <%  } %>
+
+    
+    <% blogs.forEach(blog=>{ %>
+
+
+    <div class="col-lg-6 card mt-2 mr-0">
+
+      
+
+        <div class="row p-2">
+               
+
+
+
+
+            <div class="col-5 overflow-hidden">
+                <img src="/uploads/images/<%= blog.img %>" class="card-img" alt="...">
+
+            </div>
+
+            <div class="col-7">
+                <div class="d-flex align-items-start">
+                    <h5 class="w-100"><b> <%= blog.title %> </b></h5>
+
+                    <!-- display more button -->
+                    
+                </div>
+
+                <span class="align-self-stretch "><%= blog.snippet %>
+
+                </span>
+                <div class="d-flex align-items-end">
+                    <!-- <div class="mr-2">
+                        <img src="/uploads/images/<%= blog.img %>" class="rounded-circle"
+                            style="width: 40px; height: 40px;">
+                    </div> -->
+                    <div class=" flex-grow-1">
+                        <h5 class="" style="font-size: 14px; line-height: 0.5rem;">
+                            <span><b><%= blog.author%></b></span></h5>
+
+                        <p style="font-size: 8px; line-height: 0.2rem;">
+                            <%= blog.timeCreated.toLocaleDateString() %></p>
+                    </div>
+                    
+                    <!-- enlarged photo mae 3 dots hatani hai... -->
+                    <a href="blogs/<%=blog.slug %> " class=" align-self-end">
+                      <i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;Share
+                    </a>
+                </div>
+                
+                <div class="d-flex align-items-start">
+                  <h5 class="w-100"><b> <%= blog.description %> </b></h5>
+              </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <% }) %>
+
+
+
+
+</div>
