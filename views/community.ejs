@@ -26,11 +26,13 @@
         justify-content: center;
         background: orange;
     } */
-    body,html{
-      background-image: url("back.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+  body,
+  html {
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .wrapper {
     align-items: center;
     margin: 13px 7px;
@@ -54,7 +56,7 @@
     box-shadow: 5px 7px 10px rgb(0 0 0 /50%);
   }
 
- 
+
 
   div:hover .card {
     transform: translateY(20px);
@@ -185,61 +187,96 @@
   <!-- <div class="abc">
         <a href="/logout">Logout</a>
       </div> -->
-      <a style = "margin: 31px 639px;" class="btn btn-dark" href="blogs/new" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" 
-        style = "width: 47px;
+  <a style="margin: 31px 639px;" class="btn btn-dark" href="blogs/new" role="button"><svg
+      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill"
+      viewBox="0 0 16 16" style="width: 47px;
         vertical-align: middle;
         height: 42px;">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+      <path
+        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
 
-      </svg>
-        </a>
-        <br>     
+    </svg>
+  </a>
+  <br>
 
-        <% if(blogs.length<1){%>
-
-          <p class="text-white">No posts yet, create a new one</p>
-      
-          <%  } %>
-          
-          
-          <% blogs.forEach(blog=>{ %>
-            <div class="wrapper">
-              <div class="card">
-                <img
-                  src="/uploads/images/<%= blog.img %>"
-                  alt="none">
-                <div class="info">
-                  <h1><%= blog.title %></h1>
-                  <%= blog.description %>
-                  <button>Read More</button>
-                </div>
-              </div>
-            </div>
-
-
-            <% }) %>
-  
- 
-  <div class="container">
-    <div class="m-4 text-center">
-      <!-- <img src="/images/logo.svg" alt="">
-            <p class="text-white">Lifestyle | Fashion | Travel</p> -->
-
-    </div>
-    <!-- <div class="row mb-3"> -->
-    
-    <!-- <a href="blogs/new"> <i class="fa fa-plus-circle"></i>
-                Create a doodle post</a> -->
-    <!-- </div>    -->
-
-
-    <script src="/js/index.js"></script>
+  <p id="posts">
+  </p>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"></script>
+
+
+
+
+
+  <script src="/js/index.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyC7wqpGyJqXP4uOzQhZTWqps7wVL0hLBUY",
+      authDomain: "toyxdoodle.firebaseapp.com",
+      databaseURL: "https://toyxdoodle-default-rtdb.firebaseio.com",
+      projectId: "toyxdoodle",
+      storageBucket: "toyxdoodle.appspot.com",
+      messagingSenderId: "363218346777",
+      appId: "1:363218346777:web:41d238b31be91993885b88",
+      measurementId: "G-VTTVKT07VH"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script>
+    function getdata() {
+      firebase.database().ref('blogs/').once('value').then(function (snapshot) {
+        //get your posts div
+        var posts_div = document.getElementById('posts');
+        //remove all remaining data in that div
+        posts.innerHTML = "";
+        //get data from firebase
+        var data = snapshot.val();
+        console.log(data);
+        console.log("akshat");
+        //now pass this data to our posts div
+        //we have to pass our data to for loop to get one by one
+        //we are passing the key of that post to delete it from database
+        for (let [key, value] of Object.entries(data)) {
+          console.log(value.title);
+          posts_div.innerHTML = "<div class='wrapper'>" + "<div class='card'>" + "<img src=" + value.imageURL + ">" + "<div class='info'>" +
+            "<h1>" + value.title + "</h1>" + value.description + "</div>" + "</div>" + "</div>" + posts_div.innerHTML;
+        }
+
+
+
+
+      });
+    }
+    window.onload = function () {
+      this.getdata();
+    }
+
+  </script>
+
 </body>
 
 </html>
