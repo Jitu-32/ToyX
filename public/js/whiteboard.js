@@ -1063,7 +1063,13 @@
         });
 
         window.onbeforeunload = function () {
-            return "";
+            if(!window.allowGoBack){
+                console.log("onbeforeunload called! and returning '' this time! (since window.allowGoBack is not true!)")
+                return "";
+            }else{
+                return null;
+            }
+            
         }
 
         //expose it to global scope so that other files can use it
@@ -1091,7 +1097,8 @@
             rtMan.createSocket();
             rtMan.socket.emit('coming', {
                 roomname: rtMan.roomname,
-                username: rtMan.username
+                username: rtMan.username,
+                gameType: rtMan.gameType
             });
         });
         board.makeReady();

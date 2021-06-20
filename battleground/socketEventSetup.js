@@ -20,6 +20,13 @@ const Constants = require("./socketConstants")
 var rooms = {}; // Note: ony one instance throught the server
 var io = null;
 
+function getRoomGameType(roomname) {
+    if(roomname in rooms){
+        return rooms[roomname].gameType
+    }
+    return null;
+}
+
 function initSocketIoCallbacks(_io) {
 
     // no need to reinitialise io!
@@ -34,12 +41,13 @@ function initSocketIoCallbacks(_io) {
     });
 }
 
-function getDefaultInitialisedRoom() {
+function getDefaultInitialisedRoom(gameType) {
     return {
         data: {
             boardData: [],
             messages: []
         },
+        gameType: gameType,
         members: [],
         allPlayersReadyMap: new Map(),
         solutions: new Map(),
@@ -50,12 +58,13 @@ function getDefaultInitialisedRoom() {
 function onConnection(socket) {
     console.log(ColoredLog.blue("\tio.on('connection')"));
 
-    socket.on(Constants.SOCKET_EVENT_COMING, function (data) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_COMING, function (data) {
 
-        console.log("\tsocket.on('" + Constants.SOCKET_EVENT_COMING + "')");
+        console.log("\tsocket.on('" + Constants.GAME_EVENTS.SOCKET_EVENT_COMING + "')");
 
-        var roomname = data.roomname;
-        var username = data.username;
+        let roomname = data.roomname;
+        let username = data.username;
+        let gameType = data.gameType;
 
         if (rooms[roomname]) {
 
@@ -65,7 +74,7 @@ function onConnection(socket) {
             }
         } else {
 
-            rooms[roomname] = getDefaultInitialisedRoom();
+            rooms[roomname] = getDefaultInitialisedRoom(gameType);
             rooms[roomname].members.push(username) // adding current member
             console.log("Created new room " + roomname);
         }
@@ -81,7 +90,7 @@ function onConnection(socket) {
 
     });
 
-    socket.on(Constants.SOCKET_EVENT_DRAWING, function (data) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_DRAWING, function (data) {
 
         var room = data.room;
 
@@ -91,7 +100,7 @@ function onConnection(socket) {
 
     });
 
-    socket.on(Constants.SOCKET_EVENT_CHAT_MSG, function (data) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_CHAT_MSG, function (data) {
         var roomname = data.roomname;
         rooms[roomname].data.messages.push({
             from: data.from,
@@ -101,7 +110,7 @@ function onConnection(socket) {
         console.log(rooms[roomname].data.messages);
     });
 
-    socket.on(Constants.SOCKET_EVENT_DISCONNECT, function () {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_DISCONNECT, function () {
         console.log(socket.id + ":" + socket.username + " disconnected from " + socket.roomname);
 
         if (!rooms[socket.roomname]) {
@@ -114,7 +123,7 @@ function onConnection(socket) {
         if (rooms[socket.roomname].members.length === 1) {
 
             //delete the room
-            rooms[socket.roomname] = null;
+            delete rooms[socket.roomname]
             console.log("Room " + socket.roomname + " deleted");
 
         } else {
@@ -136,7 +145,7 @@ function onConnection(socket) {
 
     });
 
-    socket.on(Constants.SOCKET_EVENT_SOLUTION, function (data) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_SOLUTION, function (data) {
         // data contains username and imageUrl
 
         thisRoom = rooms[socket.roomname];
@@ -151,7 +160,7 @@ function onConnection(socket) {
         // }
     });
 
-    socket.on(Constants.SOCKET_EVENT_VOTED_SOLUTION, function (solution) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_VOTED_SOLUTION, function (solution) {
         console.log(socket.username, " voted for: ", solution);
         let thisRoom = rooms[socket.roomname];
         thisRoom.votes.set(socket.username, solution['username']);
@@ -163,7 +172,7 @@ function onConnection(socket) {
         }
     });
 
-    socket.on(Constants.SOCKET_EVENT_IS_PLAYER_READY, function (isPlayerReady) {
+    socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_IS_PLAYER_READY, function (isPlayerReady) {
 
         console.log(ColoredLog.blue("\n-----------------------------------------\n"));
         console.log("NEW EVENT: isPlayerReady:", isPlayerReady);
@@ -286,4 +295,5 @@ function startRound(roomname) {
 
 module.exports = {
     initSocketIoCallbacks: initSocketIoCallbacks,
+    getRoomGameType: getRoomGameType
 }

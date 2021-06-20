@@ -7,14 +7,16 @@
         socket: null,
         username: null,
         roomname: null,
+        gameType: null,
 
         createSocket: function () {
 
             rtMan.socket = io();
 
-            console.log("TEST_DEBUG: ", this.socket.username, this.socket.roomname);
-            rtMan.username = $("#username").text();
-            rtMan.roomname = $("#roomname").text();
+            console.log("TEST_DEBUG: ", window.roomData);
+            rtMan.username = window.roomData.username
+            rtMan.roomname = window.roomData.roomname
+            rtMan.gameType = window.roomData.gameType
 
             rtMan.socket.on('drawing', function (data) {
 
