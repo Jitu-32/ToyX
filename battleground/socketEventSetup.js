@@ -21,10 +21,30 @@ var rooms = {}; // Note: ony one instance throught the server
 var io = null;
 
 function getRoomGameType(roomname) {
-    if(roomname in rooms){
+    if (roomname in rooms) {
         return rooms[roomname].gameType
     }
     return null;
+}
+
+// returns null if user is not in any of the rooms
+// else returns roomname
+function getJoinedRoomname(username) {
+    // console.log("getJoinedRoomname(" + username + ")")
+    let joinedRoomname = null;
+
+    for (const roomname in rooms) {
+        if (Object.hasOwnProperty.call(rooms, roomname)) {
+            const aRoom = rooms[roomname];
+            // console.log("aRoom.members: " + aRoom.members)
+            // console.log("username in aRoom.members: " +  (username in aRoom.members))
+            // console.log("aRoom: " + aRoom)
+            if (aRoom.members.indexOf(username) !== -1)
+                joinedRoomname = roomname;
+        }
+    }
+
+    return joinedRoomname;
 }
 
 function initSocketIoCallbacks(_io) {
@@ -245,7 +265,7 @@ function onConnection(socket) {
 //      (sorted aggregated votes based on votedTo username)
 function aggregateAndSortVotes(votes, members) {
     let voteCounts = new Map();
-    
+
     members.forEach(username => {
         voteCounts.set(username, 0);
     });
@@ -259,10 +279,10 @@ function aggregateAndSortVotes(votes, members) {
     });
     // descending inplace sort
     let sortedAggregatedVotes2DArr = [...voteCounts.entries()].sort((f, s) => s[1] - f[1]);
-    
+
     let sortedAggregatedVotes = []; // [aVote] where aVote is {username, vote}
 
-    sortedAggregatedVotes2DArr.forEach((aggVotes)=>{ //aggregated Votes
+    sortedAggregatedVotes2DArr.forEach((aggVotes) => { //aggregated Votes
         sortedAggregatedVotes.push({
             username: aggVotes[0],
             votes: aggVotes[1]
@@ -295,5 +315,10 @@ function startRound(roomname) {
 
 module.exports = {
     initSocketIoCallbacks: initSocketIoCallbacks,
-    getRoomGameType: getRoomGameType
+
+    RoomStaticUtils: Object.freeze({
+        getRoomGameType: getRoomGameType,
+        getJoinedRoomname: getJoinedRoomname
+    })
+
 }

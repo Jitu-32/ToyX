@@ -4,7 +4,8 @@
 */
 const express = require('express');
 const router = express.Router();
-const getRoomGameType = require('../battleground/socketEventSetup').getRoomGameType
+const ColoredLog = require('../utils/coloredlogger').ColoredLog
+const RoomStaticUtils = require('../battleground/socketEventSetup').RoomStaticUtils
 
 router.get('/enter', function (req, res) {
 
@@ -19,17 +20,31 @@ router.post('/enter', function (req, res) {
 
     var roomname = req.body.roomname;
     var username = req.body.username;
+    const joinedRoomname = RoomStaticUtils.getJoinedRoomname(username);
+    console.log(ColoredLog.red("joinedRoomname: " + joinedRoomname + " by username: " + username, true))
 
     if (!roomname || roomname.indexOf(' ') > -1 || roomname.length === 0) {
-        res.render('battlegroundEntry', {
+        res.send({
             visibility: 'visible',
             msg: 'Invalid Roomname'
         });
 
     } else if (!username || username.length === 0) {
-        res.render('battlegroundEntry', {
+        res.send({
             visibility: 'visible',
             msg: 'Invalid Username'
+        });
+
+    } else if (joinedRoomname) {
+        let msg2ndLine = "Cannot join 2 rooms at once!"
+
+        if (joinedRoomname === roomname) {
+            msg2ndLine = "Cannot rejoin same room from different tabs!"
+        }
+
+        res.send({
+            visibility: 'visible',
+            msg: `User ${username} already in Room ${joinedRoomname}! \n${msg2ndLine}`
         });
 
     } else {
@@ -37,7 +52,7 @@ router.post('/enter', function (req, res) {
 
         // check if the room alreaddy has a gameType
 
-        let roomGameType = getRoomGameType(roomname); // todo: replace by some util to find the type of room, should return null if room doesn't exists!
+        let roomGameType = RoomStaticUtils.getRoomGameType(roomname); // todo: replace by some util to find the type of room, should return null if room doesn't exists!
         if (!roomGameType) {
             // redirect to the same url without gameType
             //  this will show UI to ask for `gametype`
