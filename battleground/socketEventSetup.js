@@ -211,8 +211,8 @@ function onConnection(socket) {
         socket.roundStartInterval = setInterval(() => {
             if (secBeforeRoundStart == 0) {
                 clearInterval(socket.roundStartInterval);
-
-                let problemStatement = ProblemStatement.getTestProblemStatement(); //todo!
+                let gameType = rooms[socket.roomname].gameType;
+                let problemStatement = ProblemStatement.getTestProblemStatement(gameType); //todo!
                 io.in(socket.roomname).emit("startRound", {
                     problemStatement: problemStatement,
                     round: 1,

@@ -161,11 +161,19 @@
                 $('#lobbyWaitingTime').html("Starting in " + seconds);
             });
 
-            rtMan.socket.on('startRound', function (data) {
+            rtMan.socket.on('startRound', function(data) {
                 $('.LobbyWidget').hide();
-                console.log("startRound: " + JSON.stringify(data));
+                console.log("startRound: "+JSON.stringify(data));
                 //todo: display problem statement in problem statement area!
-                $('#problemStatement').text("title: " + data.problemStatement.title + "\ndesc: " + data.problemStatement.desc)
+                console.log("title: " + data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
+                
+                $('#problemTitle').text(data.problemStatement.title)
+                $('#problemDesc').text(data.problemStatement.desc)
+                $('#problemWords').text(data.problemStatement.words)
+                if(data.problemStatement.imageUrl){
+                    $('#problemImage').attr("src", data.problemStatement.imageUrl)
+                    $('#problemImage').show();
+                }
             })
 
             rtMan.socket.on('roundResults', function (roundResults) {
