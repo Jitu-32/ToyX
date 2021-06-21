@@ -24,5 +24,71 @@
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border: 1;
-    background: blue;
+    background: rgb(160, 160, 236);
 }
+  
+  /* GENERAL BUTTON STYLING */
+  .btn-x,
+  .btn-x::after {
+    -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+      transition: all 0.3s;
+  }
+  
+  .btn-2 {
+    background: none;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    width: auto;
+    height: auto;
+    display: block;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 1em auto;
+    padding: 0.8em;
+    position: relative;
+    text-transform: uppercase;
+  }
+
+  .btn-3 {
+    background: none;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    width: auto;
+    height: auto;
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0.5em auto;
+    padding: 0.3em;
+    position: relative;
+    text-transform: uppercase;
+  }
+  
+  .btn-x::before,
+  .btn-x::after {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .btn-x:hover {
+    color: #2ecc71;
+  }
+  
+  /* BUTTON 2 */
+  .btn-x::after {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 0;
+  }
+  
+  .btn-x:hover:after {
+    width: 100%;
+  }
+  
