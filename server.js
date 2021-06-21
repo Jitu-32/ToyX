@@ -91,7 +91,7 @@ app.get('/community', (req, res, next) => {
             res.render('community', { blogs: blogs, data: data });
         }
     });
-});
+}); 
 
 
 

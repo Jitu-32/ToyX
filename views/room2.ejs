@@ -5,16 +5,55 @@
   <meta charset="utf-8">
   <title></title>
   <script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
+	<link rel="stylesheet" href="./css/video.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
 </head>
 
 <body>
+
+  <!--    Made by Erik Terwan    -->
+<!--   24th of November 2015   -->
+<!--        MIT License        -->
+<nav role='navigation'>
+  <div id="menuToggle">
+    <!--
+    A fake / hidden checkbox is used as click reciever,
+    so you can use the :checked selector on it.
+    -->
+    <input type="checkbox" />
+    
+    <!--
+    Some spans to act as a hamburger.
+    
+    They are acting like a real hamburger,
+    not that McDonalds stuff.
+    -->
+    <span></span>
+    <span></span>
+    <span></span>
+    
+    <!--
+    Too bad the menu has to be inside of the button
+    but hey, it's pure CSS magic.
+    -->
+    <ul id="menu">
+      <a href="/home"><li><i class="fa fa-home" aria-hidden="true"></i> &nbsp;HOME</a></li>
+      <a href="battleground"><li><i class="fa fa-gamepad" aria-hidden="true"></i> &nbsp;PLAY</a></li>
+      <a href="/community"><li><i class="fa fa-users" aria-hidden="true"></i> &nbsp;COMMUNITY</a></li>
+      <a href="/contact"><li><i class="fa fa-phone" aria-hidden="true"></i> &nbsp;CONTACT</a></li>
+      <a href="/drawboard"><li><i class="fa fa-paint-brush" aria-hidden="true"></i> &nbsp;DRAW</a></li>
+      <a href="/experts"><li><i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp;EXPERTS</a></li>
+    </ul>
+  </div>
+</nav>
+
   <script>
     callFrame = window.DailyIframe.createFrame({
       showLeaveButton: true,
       iframeStyle: {
         position: 'fixed',
-        width: '100%',
-        height: '100%'
+        width: '91%',
+        height: '93%'
       }
     });
     callFrame.join({
