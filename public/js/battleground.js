@@ -168,11 +168,13 @@
                 console.log("title: " + data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
                 
                 $('#problemTitle').text(data.problemStatement.title)
-                $('#problemDesc').text(data.problemStatement.desc)
-                $('#problemWords').text(data.problemStatement.words)
-                if(data.problemStatement.imageUrl){
+                // $('#problemDesc').text(data.problemStatement.desc)
+                
+                if(data.problemStatement.type === "picture"){
                     $('#problemImage').attr("src", data.problemStatement.imageUrl)
                     $('#problemImage').show();
+                }else{
+                    $('#problemWords').text(data.problemStatement.words)
                 }
             })
 

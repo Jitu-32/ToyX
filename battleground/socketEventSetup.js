@@ -13,7 +13,8 @@
 
 
 const ColoredLog = require('../utils/coloredlogger').ColoredLog
-const ProblemStatement = require("../models/battlefield/problem").ProblemStatement;
+const ProblemStatement = require("../models/battleground/problem").ProblemStatement;
+const ProblemProvider = require("../battleground/problemProvider").ProblemProvider;
 const Constants = require("./socketConstants")
 
 
@@ -232,7 +233,20 @@ function onConnection(socket) {
             if (secBeforeRoundStart == 0) {
                 clearInterval(socket.roundStartInterval);
                 let gameType = rooms[socket.roomname].gameType;
-                let problemStatement = ProblemStatement.getTestProblemStatement(gameType); //todo!
+                let problemStatement;
+                switch (gameType) {
+                    case ProblemStatement.WORD_TYPE:
+                        problemStatement = ProblemProvider.getRandomWordProblem();
+                        break;
+
+                    case ProblemStatement.PICTURE_TYPE:
+                        problemStatement = ProblemProvider.getRandomPictureProblem();
+                        break;
+
+                    default:
+                        throw new Error("Unknown Problem type: " + gameType)
+                }
+                console.log("Emiting: problemStatement = " + problemStatement + "] "+gameType);
                 io.in(socket.roomname).emit("startRound", {
                     problemStatement: problemStatement,
                     round: 1,
