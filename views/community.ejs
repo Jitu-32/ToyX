@@ -65,7 +65,7 @@
     background: black;
     position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     transition: 0.4s ease-out;
     box-shadow: 5px 7px 10px rgb(0 0 0 /50%);
   }
@@ -185,7 +185,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" aria-current="page" href="drawboard"><b><i class="fa fa-paint-brush" aria-hidden="true"></i> &nbsp;DRAW</b></a>
-
+					</li>
+          <li class="nav-item">
+						<a class="nav-link" aria-current="page" href="experts"><b><i class="fa fa-video-camera" aria-hidden="true"></i> &nbsp;EXPERTS</b></a>
 					</li>
 				</ul>
 				  <span class="navbar-text">
@@ -271,7 +273,7 @@
         for (let [key, value] of Object.entries(data)) {
           console.log(value.title);
           posts_div.innerHTML = "<div class='wrapper'>" + "<div class='card'>" + "<img src=" + value.imageURL + ">" + "<div class='info'>" +
-            "<h1>" + value.title + "</h1>" + value.description + "</div>" + "</div>" + "</div>" + posts_div.innerHTML;
+            "<h4>" + value.title + "</h4>" +  value.description + "</div>" + "</div>" + "</div>" + posts_div.innerHTML;
         }
 
 

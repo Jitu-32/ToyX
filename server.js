@@ -77,20 +77,24 @@ app.use('/', index);
 
 //route for the index
 
-app.get('/community', (req, res, next) => {
-    console.log("profile");
-    User.findOne({ unique_id: req.session.userId }, async (err, data) => {
-        console.log("data");
-        console.log(data);
-        if (!data) {
-            res.redirect('/register');
-        } else {
-            //console.log("found");
-            req.session.data = data
-            let blogs = await Blog.find().sort({ timeCreated: 'desc' });
-            res.render('community', { blogs: blogs, data: data });
-        }
-    });
+// app.get('/community', (req, res, next) => {
+//     console.log("profile");
+//     User.findOne({ unique_id: req.session.userId }, async (err, data) => {
+//         console.log("data");
+//         console.log(data);
+//         if (!data) {
+//             res.redirect('/register');
+//         } else {
+//             //console.log("found");
+//             req.session.data = data
+//             let blogs = await Blog.find().sort({ timeCreated: 'desc' });
+//             res.render('community', { blogs: blogs, data: data });
+//         }
+//     });
+// }); 
+
+app.get('/community', function (req, res) {
+    res.render('community');
 });
 
 
