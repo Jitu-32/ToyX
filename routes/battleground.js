@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const ColoredLog = require('../utils/coloredlogger').ColoredLog
 const RoomStaticUtils = require('../battleground/socketEventSetup').RoomStaticUtils
+const ProblemProvider = require('../battleground/problemProvider').ProblemProvider
 
 router.get('/enter', function (req, res) {
 
@@ -17,6 +18,8 @@ router.get('/enter', function (req, res) {
 });
 
 router.post('/enter', function (req, res) {
+
+    console.log("req.body = ", req.body);
 
     let roomname = req.body.roomname;
     let username = req.body.username;
@@ -37,10 +40,10 @@ router.post('/enter', function (req, res) {
             msg: 'Invalid Username'
         });
 
-    } else if (!theme || theme.length === 0) {
+    } else if (!theme || theme.length === 0 || !ProblemProvider.isThemeValid(theme)) {
         res.send({
             visibility: 'visible',
-            msg: 'Invalid theme'
+            msg: `Invalid theme [${theme}]; valid themes: ${ProblemProvider.getAllThemes()}`,
         });
 
     } else if (joinedRoomname) {
@@ -58,17 +61,19 @@ router.post('/enter', function (req, res) {
     } else {
         // res.redirect(`/battleground?roomname=${roomname}&username=${username}`)
 
-        // check if the room alreaddy has a gameType
+        // check if the room already has a gameType
 
         let roomGameType = RoomStaticUtils.getRoomGameType(roomname); // returns null if room doesn't exists!
+        let roomTheme = RoomStaticUtils.getRoomTheme(roomname); // returns null if room doesn't exists!
+
         if (!roomGameType) {
             // redirect to the same url without gameType
             //  this will show UI to ask for `gametype`
-            res.redirect(`/battleground/enter?roomname=${roomname}&username=${username}`)
+            res.redirect(`/battleground/enter?roomname=${roomname}&username=${username}&theme=${theme}`)
 
         } else {
             // no need to ask for roomGameType, directly forward to battleground
-            res.redirect(`/battleground?roomname=${roomname}&username=${username}&gameType=${roomGameType}`)
+            res.redirect(`/battleground?roomname=${roomname}&username=${username}&gameType=${roomGameType}&theme=${roomTheme}`)
         }
     }
 

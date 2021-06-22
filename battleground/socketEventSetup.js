@@ -28,6 +28,13 @@ function getRoomGameType(roomname) {
     return null;
 }
 
+function getRoomTheme(roomname) {
+    if (roomname in rooms) {
+        return rooms[roomname].theme
+    }
+    return null;
+}
+
 // returns null if user is not in any of the rooms
 // else returns roomname
 function getJoinedRoomname(username) {
@@ -328,6 +335,13 @@ function aggregateAndSortVotes(votes, members) {
 function startRound(roomname) {
     rooms[roomname].timeRemaining = 30; // seconds to answer the solution after problem statement send!!
     let theInterval = setInterval(function () {
+
+        if (!roomname || !rooms[roomname]) {
+            clearInterval(theInterval);
+            console.log(ColoredLog.red("Rejected & cleared setInterval in startRound! ", true));
+            return
+        }
+
         io.in(roomname).emit('timeRemaining', rooms[roomname].timeRemaining);
         if (rooms[roomname].timeRemaining == 0) {
             clearInterval(theInterval);
@@ -352,6 +366,7 @@ module.exports = {
 
     RoomStaticUtils: Object.freeze({
         getRoomGameType: getRoomGameType,
+        getRoomTheme: getRoomTheme,
         getJoinedRoomname: getJoinedRoomname
     })
 

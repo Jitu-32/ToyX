@@ -109,6 +109,13 @@ body {
 .form__signin-button:active {
     background: #1da88a;
 }
+
+.form__signin-button:disabled {
+  background: white;
+  color: green;
+  box-shadow: none;
+}
+
 /* Links styles
   ======================================= */
 .form__links {
@@ -148,7 +155,8 @@ body {
     display: inline-block;
     border: 1px solid gray;
     border-radius: 4px;
-    margin-left: 80px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 15px;
     padding: 10px 30px 10px 20px;
     background-color: #ffffff;

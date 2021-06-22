@@ -3,6 +3,8 @@ const ProblemStatement = require('../models/battleground/problem').ProblemStatem
 const csv = require('csv-parser')
 const fs = require('fs')
 
+const allValidThemes = new Set();
+
 const allWordProblems = [];
 const wordTitle = "Draw doodle for these words:";
 
@@ -21,6 +23,8 @@ fs.createReadStream('battleground/problemData.csv') // path should be relative t
         let desc = data['desc'];
         let imageUrl = data['imageUrl'];
         let moreInfoLink = data['moreInfoLink'];
+
+        allValidThemes.add(theme);
 
         allWordProblems.push(new ProblemStatement(
             ProblemStatement.WORD_TYPE,
@@ -64,14 +68,24 @@ function getRandomProblem(targetTheme, gameType) {
             shortlistedProblems.push(aProblem)
     });
 
-    let high = shortlistedProblems.length;
+    let high = shortlistedProblems.length-1;
     let low = 0;
     let randI = Math.floor(Math.random() * (high - low) + low);
     return shortlistedProblems[randI];
 }
 
+function isThemeValid(theme) {
+    return allValidThemes.has(theme)
+}
+
+function getAllThemes() {
+    return  [...allValidThemes];
+}
+
 module.exports = Object.freeze({
     ProblemProvider: {
         getRandomProblem: getRandomProblem,
+        isThemeValid: isThemeValid,
+        getAllThemes: getAllThemes
     }
 })
