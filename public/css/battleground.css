@@ -144,19 +144,12 @@ body {
   
   /* Dropdown */
   
-  .dropdown {
-    display: inline-flex;
-    position: relative;
-    margin-left: 80px;
-    margin-bottom: 15px;
-    align-items: center;
-    justify-content: center;
-  }
-  
   .dd-button {
     display: inline-block;
     border: 1px solid gray;
     border-radius: 4px;
+    margin-left: 80px;
+    margin-bottom: 15px;
     padding: 10px 30px 10px 20px;
     background-color: #ffffff;
     cursor: pointer;
