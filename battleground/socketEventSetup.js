@@ -333,7 +333,7 @@ function aggregateAndSortVotes(votes, members) {
 }
 
 function startRound(roomname) {
-    rooms[roomname].timeRemaining = 5; // seconds to answer the solution after problem statement send!!
+    rooms[roomname].timeRemaining = 30; // seconds to answer the solution after problem statement send!!
     let theInterval = setInterval(function () {
         io.in(roomname).emit('timeRemaining', rooms[roomname].timeRemaining);
         if (rooms[roomname].timeRemaining == 0) {

@@ -113,7 +113,7 @@
         <!-- <button id="startRoundButton" type="button">I'm Ready</button> -->
         <div class="btncontainer">
             <button id="startRoundButton" class="btn-x btn-2">I'm Ready</button>
-          </div>
+        </div>
         <h3 id="lobbyWaitingTime" style="color: rgb(233, 75, 75); border: 1;">Starting in 5</h3>
         <div id="playersJoinedList"></div>
     </div>
@@ -123,10 +123,11 @@
         style="overflow-y: auto; text-align: left;border: 1px solid;padding: 20px;position: absolute;top: 100px;z-index: 2;right: 0;bottom: 0;width: 30%;">
 
         <p id="roundFinishingTime" style="color: rgb(233, 75, 75); border: 1;"></p>
-        <h2><span id="problemTitle" ></span></h2>
-        <div style="text-align: center;"><img id="problemImage" src="" alt="" style="width: 66%;max-height: 50%;display: none;"></div>
-        <p id="problemDesc" ></p>
-        <pre id="problemWords" ></pre>
+        <h2><span id="problemTitle"></span></h2>
+        <div style="text-align: center;"><img id="problemImage" src="" alt=""
+                style="width: 66%;max-height: 50%;display: none;"></div>
+        <p id="problemDesc"></p>
+        <pre id="problemWords"></pre>
 
     </div>
 
@@ -154,19 +155,20 @@
         </div>
 
         <div class="flashcard" style="display: none;">
-         <div class="card" style="width: 18rem;">
-            <img id="flashcard" class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="card" style="width: 18rem; background: antiquewhite; padding: 10px;">
+                <img id="flashcardImg" class="card-img-top" src="" alt="Card image cap">
+                <div class="card-body">
+                    <h5 id="flashcardTitle" class="card-title">Card title</h5>
+                    <p id="flashcardDesc" class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a id="flashcardMoreInfoId" href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
             </div>
-          </div>
         </div>
         <!-- <button id="backToLoginButton" style="margin: 30px;">Back</button> -->
         <div class="btncontainer" style="margin: 30px;">
             <button id="backToLoginButton" class="btn-x btn-3">Back</button>
-          </div>
+        </div>
 
     </div>
 
