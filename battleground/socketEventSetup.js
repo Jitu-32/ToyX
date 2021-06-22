@@ -87,6 +87,11 @@ function onConnection(socket) {
         let username = data.username;
         let gameType = data.gameType;
 
+        if(!roomname || !username || !gameType){
+            console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_COMING ", true));
+            return;
+        }
+
         if (rooms[roomname]) {
 
             if (rooms[roomname].members.indexOf(username) === -1) {
@@ -113,16 +118,22 @@ function onConnection(socket) {
 
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_DRAWING, function (data) {
 
-        var room = data.room;
+        // var room = data.room;
 
-        rooms[room].data.boardData.push(data.boardData); // add it to the room
+        // rooms[room].data.boardData.push(data.boardData); // add it to the room
 
-        socket.broadcast.to(room).emit('drawing', data); // send to all others except the sender
+        // socket.broadcast.to(room).emit('drawing', data); // send to all others except the sender
 
     });
 
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_CHAT_MSG, function (data) {
         var roomname = data.roomname;
+
+        if(!roomname){
+            console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_CHAT_MSG ", true));
+            return;
+        }
+
         rooms[roomname].data.messages.push({
             from: data.from,
             msg: data.msg
@@ -134,10 +145,10 @@ function onConnection(socket) {
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_DISCONNECT, function () {
         console.log(socket.id + ":" + socket.username + " disconnected from " + socket.roomname);
 
-        if (!rooms[socket.roomname]) {
+        if (!socket.roomname || !socket.username || !rooms[socket.roomname]) {
             console.error(ColoredLog.red("\nCAUGHT ERROR in socket.on('disconnect') ", true) +
                 "\n\t rooms[" + socket.roomname + "] is undefined!\n");
-            // return;
+            return;
         }
 
         // if all users have left  the room
@@ -169,6 +180,11 @@ function onConnection(socket) {
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_SOLUTION, function (data) {
         // data contains username and imageUrl
 
+        if (!socket.roomname || !socket.username || !rooms[socket.roomname]) {
+            console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_SOLUTION ", true));
+            return
+        }
+
         thisRoom = rooms[socket.roomname];
         thisRoom.solutions.set(socket.username, data);
 
@@ -183,6 +199,12 @@ function onConnection(socket) {
 
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_VOTED_SOLUTION, function (solution) {
         console.log(socket.username, " voted for: ", solution);
+
+        if (!socket.roomname || !socket.username || !rooms[socket.roomname]) {
+            console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_VOTED_SOLUTION ", true));
+            return
+        }
+
         let thisRoom = rooms[socket.roomname];
         thisRoom.votes.set(socket.username, solution['username']);
 
@@ -195,14 +217,19 @@ function onConnection(socket) {
 
     socket.on(Constants.GAME_EVENTS.SOCKET_EVENT_IS_PLAYER_READY, function (isPlayerReady) {
 
-        console.log(ColoredLog.blue("\n-----------------------------------------\n"));
-        console.log("NEW EVENT: isPlayerReady:", isPlayerReady);
-        console.log("socket: ", {
-            "socket.roomname": socket.roomname,
-            "socket.username": socket.username,
-            "socket.roundRunning": socket.roundRunning,
-        });
-        console.log("rooms[socket.roomname] = ", rooms[socket.roomname], "\n\n")
+        // console.log(ColoredLog.blue("\n-----------------------------------------\n"));
+        console.log("NEW EVENT: isPlayerReady:", isPlayerReady, " by socket.username = ", socket.username);
+        // console.log("socket: ", {
+        //     "socket.roomname": socket.roomname,
+        //     "socket.username": socket.username,
+        //     "socket.roundRunning": socket.roundRunning,
+        // });
+        // console.log("rooms[socket.roomname] = ", rooms[socket.roomname], "\n\n")
+
+        if (!socket.roomname || !socket.username || !rooms[socket.roomname]) {
+            console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_IS_PLAYER_READY ", true));
+            return
+        }
 
         allPlayersReadyMap = rooms[socket.roomname].allPlayersReadyMap;
         allPlayersReadyMap.set(socket.username, isPlayerReady);
