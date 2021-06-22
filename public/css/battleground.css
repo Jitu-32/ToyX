@@ -22,7 +22,7 @@ body {
   ======================================= */
 .form {
     width: 400px;
-    height: 600px;
+    height: 700px;
     padding: 60px 35px 35px;
     border-radius: 40px;
     background: #ecf0f3;
@@ -123,12 +123,105 @@ body {
 }
 
 .abtn {
-    font: 11px Arial;
+    font: 15px Arial;
     text-decoration: none;
     background-color: #EEEEEE;
     color: #333333;
+    margin-left: 90px;
     padding: 2px 6px 2px 6px;
     border: 2px solid rgb(51, 47, 47);
     border-radius: 5px;
 }
-
+  
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  a:hover {
+    color: #222222
+  }
+  
+  /* Dropdown */
+  
+  .dropdown {
+    display: inline-flex;
+    position: relative;
+    margin-left: 80px;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dd-button {
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 10px 30px 10px 20px;
+    background-color: #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+  }
+  
+  .dd-button:hover {
+    background-color: #eeeeee;
+  }
+  
+  
+  .dd-input {
+    display: none;
+  }
+  
+  .dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+  }
+  
+  .dd-input + .dd-menu {
+    display: none;
+  } 
+  
+  .dd-input:checked + .dd-menu {
+    display: block;
+  } 
+  
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .dd-menu li:hover {
+    background-color: #f6f6f6;
+  }
+  
+  .dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+  }
+  
+  .dd-menu li.divider{
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
+  }
