@@ -1,9 +1,10 @@
 
 class ProblemStatement {
 
-    constructor(type, id, title, words, desc, imageUrl, moreInfoLink) {
+    constructor(type, id, theme, title, words, desc, imageUrl, moreInfoLink) {
         this.type = type;
         this.id = id;
+        this.theme = theme;
         this.title = title;
         this.words = words;
         this.desc = desc;

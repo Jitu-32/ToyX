@@ -62,13 +62,14 @@ function initSocketIoCallbacks(_io) {
     });
 }
 
-function getDefaultInitialisedRoom(gameType) {
+function getDefaultInitialisedRoom(gameType, theme) {
     return {
         data: {
             boardData: [],
             messages: []
         },
         gameType: gameType,
+        theme: theme,
         members: [],
         allPlayersReadyMap: new Map(),
         solutions: new Map(),
@@ -86,8 +87,9 @@ function onConnection(socket) {
         let roomname = data.roomname;
         let username = data.username;
         let gameType = data.gameType;
+        let theme = data.theme;
 
-        if(!roomname || !username || !gameType){
+        if(!roomname || !username || !gameType || !theme){
             console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_COMING ", true));
             return;
         }
@@ -100,7 +102,7 @@ function onConnection(socket) {
             }
         } else {
 
-            rooms[roomname] = getDefaultInitialisedRoom(gameType);
+            rooms[roomname] = getDefaultInitialisedRoom(gameType, theme);
             rooms[roomname].members.push(username) // adding current member
             console.log("Created new room " + roomname);
         }
@@ -260,20 +262,11 @@ function onConnection(socket) {
             if (secBeforeRoundStart == 0) {
                 clearInterval(socket.roundStartInterval);
                 let gameType = rooms[socket.roomname].gameType;
-                let problemStatement;
-                switch (gameType) {
-                    case ProblemStatement.WORD_TYPE:
-                        problemStatement = ProblemProvider.getRandomWordProblem();
-                        break;
+                let theme = rooms[socket.roomname].theme;
+                let problemStatement = ProblemProvider.getRandomProblem(theme, gameType);
 
-                    case ProblemStatement.PICTURE_TYPE:
-                        problemStatement = ProblemProvider.getRandomPictureProblem();
-                        break;
-
-                    default:
-                        throw new Error("Unknown Problem type: " + gameType)
-                }
-                console.log("Emiting: problemStatement = " + problemStatement + "] "+gameType);
+                console.log("Emiting: problemStatement = " + JSON.stringify(problemStatement) + ", " + gameType + ", " + theme);
+                
                 io.in(socket.roomname).emit("startRound", {
                     problemStatement: problemStatement,
                     round: 1,

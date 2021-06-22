@@ -16,6 +16,7 @@ fs.createReadStream('battleground/problemData.csv') // path should be relative t
         // console.log(data)
 
         let id = data['id'];
+        let theme = data['theme']
         let words = data['words'];
         let desc = data['desc'];
         let imageUrl = data['imageUrl'];
@@ -24,6 +25,7 @@ fs.createReadStream('battleground/problemData.csv') // path should be relative t
         allWordProblems.push(new ProblemStatement(
             ProblemStatement.WORD_TYPE,
             id,
+            theme,
             wordTitle,
             words,
             desc,
@@ -33,6 +35,7 @@ fs.createReadStream('battleground/problemData.csv') // path should be relative t
         allPictureProblems.push(new ProblemStatement(
             ProblemStatement.PICTURE_TYPE,
             id,
+            theme,
             pictureTitle,
             words,
             desc,
@@ -41,23 +44,34 @@ fs.createReadStream('battleground/problemData.csv') // path should be relative t
     })
 
 
-function getRandomWordProblem() {
-    let high = allWordProblems.length;
-    let low = 0;
-    let randI = Math.floor(Math.random() * (high - low) + low);
-    return allWordProblems[randI];
-}
+function getRandomProblem(targetTheme, gameType) {
+    let shortlistedProblems = [];
+    let baseProblems;
+    switch (gameType) {
+        case "word":
+            baseProblems = allWordProblems;
+            break;
 
-function getRandomPictureProblem() {
-    let high = allPictureProblems.length;
+        case "picture":
+            baseProblems = allPictureProblems;
+            break;
+
+        default:
+            throw new Error("unknown gameType: " + gameType);
+    }
+    baseProblems.forEach(aProblem => {
+        if (aProblem.theme === targetTheme)
+            shortlistedProblems.push(aProblem)
+    });
+
+    let high = shortlistedProblems.length;
     let low = 0;
     let randI = Math.floor(Math.random() * (high - low) + low);
-    return allPictureProblems[randI];
+    return shortlistedProblems[randI];
 }
 
 module.exports = Object.freeze({
     ProblemProvider: {
-        getRandomWordProblem: getRandomWordProblem,
-        getRandomPictureProblem: getRandomPictureProblem
+        getRandomProblem: getRandomProblem,
     }
 })

@@ -1098,7 +1098,8 @@
             rtMan.socket.emit('coming', {
                 roomname: rtMan.roomname,
                 username: rtMan.username,
-                gameType: rtMan.gameType
+                gameType: rtMan.gameType,
+                theme: rtMan.theme
             });
         });
         board.makeReady();

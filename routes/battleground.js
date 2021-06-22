@@ -18,10 +18,12 @@ router.get('/enter', function (req, res) {
 
 router.post('/enter', function (req, res) {
 
-    var roomname = req.body.roomname;
-    var username = req.body.username;
+    let roomname = req.body.roomname;
+    let username = req.body.username;
+    let theme = req.body.theme;
+
     const joinedRoomname = RoomStaticUtils.getJoinedRoomname(username);
-    console.log(ColoredLog.red("joinedRoomname: " + joinedRoomname + " by username: " + username, true))
+    console.log(ColoredLog.red("joinedRoomname: " + joinedRoomname + " by username: " + username + " with theme: " + theme, true))
 
     if (!roomname || roomname.indexOf(' ') > -1 || roomname.length === 0) {
         res.send({
@@ -33,6 +35,12 @@ router.post('/enter', function (req, res) {
         res.send({
             visibility: 'visible',
             msg: 'Invalid Username'
+        });
+
+    } else if (!theme || theme.length === 0) {
+        res.send({
+            visibility: 'visible',
+            msg: 'Invalid theme'
         });
 
     } else if (joinedRoomname) {
@@ -52,7 +60,7 @@ router.post('/enter', function (req, res) {
 
         // check if the room alreaddy has a gameType
 
-        let roomGameType = RoomStaticUtils.getRoomGameType(roomname); // todo: replace by some util to find the type of room, should return null if room doesn't exists!
+        let roomGameType = RoomStaticUtils.getRoomGameType(roomname); // returns null if room doesn't exists!
         if (!roomGameType) {
             // redirect to the same url without gameType
             //  this will show UI to ask for `gametype`

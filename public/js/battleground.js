@@ -17,6 +17,7 @@
             rtMan.username = window.roomData.username
             rtMan.roomname = window.roomData.roomname
             rtMan.gameType = window.roomData.gameType
+            rtMan.theme = window.roomData.theme
 
             rtMan.socket.on('drawing', function (data) {
 
