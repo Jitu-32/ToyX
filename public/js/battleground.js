@@ -167,6 +167,8 @@
                 //todo: display problem statement in problem statement area!
                 console.log("title: " + data.problemStatement.title + "\ndesc: "+ data.problemStatement.desc)
                 
+                window.problemStatement = data.problemStatement;
+
                 $('#problemTitle').text(data.problemStatement.title)
                 // $('#problemDesc').text(data.problemStatement.desc)
                 
@@ -182,6 +184,12 @@
                 $('.VotingWidget').hide();
                 $('.ResultsWidget').show();
                 console.log("roundResults: ", roundResults);
+
+                // id,words,desc,imageUrl,moreInfoLink
+                $('#flashcardImg').attr("src", window.problemStatement['imageUrl'])
+                $('#flashcardTitle').text(window.problemStatement['words'])
+                $('#flashcardDesc').text(window.problemStatement['desc'])
+                $('#flashcardMoreInfoId').attr("href", window.problemStatement['moreInfoLink'])
 
                 let resultItemContainer = $(".ResultItemContainer").get()[0];
                 roundResults.forEach((aResult, i) => {
