@@ -121,7 +121,7 @@
             <button id="startRoundButton" class="btn-x btn-2">I'm Ready</button>
         </div>
         <h3 id="lobbyWaitingTime" style="color: rgb(233, 75, 75); border: 1;">Starting in 5</h3>
-        <div id="playersJoinedList"></div>
+        <div style="font-size: large;" id="playersJoinedList"></div>
     </div>
 
     <!-- todo: add style to css! -->
@@ -163,7 +163,7 @@
             <!-- <h2 class="card ResultItem">"#1:    " + username + " got " + votes +" vote(s)"</h2> -->
         </div>
 
-        <div class="flashcard">
+        <!-- <div class="flashcard">
             <div class="card" style="width: 18rem; background: antiquewhite; padding: 10px;margin-left: auto; margin-right: auto;">
                 <img id="flashcardImg" class="card-img-top" src="" alt="Card image cap" style="width: 80%;">
                 <div class="card-body">
@@ -172,7 +172,25 @@
                     <a id="flashcardMoreInfoId" href="#" class="btn btn-primary">More Information</a>
                 </div>
             </div>
+        </div> -->
+
+        <div class="cardcontainer">
+ 
+            <div class="carrd">
+              <div class="img-cover"><img id="flashcardImg"></div>
+              
+              <div class="desc">
+                <h1 id="flashcardTitle"></h1>
+                <p id="flashcardDesc"></p>
+                <a id="flashcardMoreInfoId" href ="#">More Info <svg width="19" height="14" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 9H22M12 1.5L20.9333 8.2C21.4667 8.6 21.4667 9.4 20.9333 9.8L12 16.5" stroke="white" stroke-width="3"/>
+          </svg></a>
+              </div>
+            </div>
         </div>
+
+
+
         <!-- <button id="backToLoginButton" style="margin: 30px;">Back</button> -->
         <div class="btncontainer" style="margin: 30px;">
             <button id="backToLoginButton" class="btn-x btn-3">Back</button>

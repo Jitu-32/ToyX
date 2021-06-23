@@ -18,3 +18,61 @@
     background-color: rgb(129, 129, 202);
     color: aliceblue;
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.cardcontainer {
+  width: 80%;
+  margin: 0 auto;
+  display :flex;
+  justify-content:space-evenly;
+  flex-wrap:wrap;
+}
+
+.card {
+    border-radius : 20px;
+}
+
+.carrd{
+  margin : auto;
+  width: 350px;
+  overflow : hidden;
+  border-radius : 20px;
+  background : rgb(217, 217, 241);
+  margin-top:50px;
+  transition: all .2s;
+  box-shadow:5px 5px 15px rgba(0,0,0, .3);
+}
+
+.carrd img{
+  width: 350px;
+  height:350px;
+  object-fit:cover;
+}
+
+.desc{
+  padding : 1.5em ;
+  font-family: 'Poppins', sans-serif;
+}
+.desc h1{
+  display:inline;
+}
+.tdesc{
+  margin-bottom:40px;
+  width:100%;
+  height:50px;
+  overflow: auto;
+}
+
+.desc a{
+  text-decoration: none;
+  background-color: dodgerblue;
+  padding: 15px 25px;
+  color:white;
+  border-radius: 15px;
+  display:block;
+  text-align: center;
+  transition: all .2s;
+}
+
