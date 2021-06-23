@@ -1099,7 +1099,8 @@
                 roomname: rtMan.roomname,
                 username: rtMan.username,
                 gameType: rtMan.gameType,
-                theme: rtMan.theme
+                theme: rtMan.theme,
+                timeSeconds: rtMan.timeSeconds,
             });
         });
         board.makeReady();

@@ -25,13 +25,15 @@
         const username = getQueryVariable("username");
         const gameType = getQueryVariable("gameType");
         const theme = getQueryVariable("theme");
+        const timeSeconds = getQueryVariable("timeSeconds");
 
         // inserting query params into window object ot make it accessible globally
         window.roomData = {
             roomname: roomname,
             username: username,
             gameType: gameType,
-            theme: theme
+            theme: theme,
+            timeSeconds: timeSeconds,
         }
     </script>
 

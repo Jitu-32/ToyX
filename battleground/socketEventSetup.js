@@ -35,6 +35,13 @@ function getRoomTheme(roomname) {
     return null;
 }
 
+function getRoomTimeSeconds(roomname) {
+    if (roomname in rooms) {
+        return rooms[roomname].timeSeconds
+    }
+    return null;
+}
+
 // returns null if user is not in any of the rooms
 // else returns roomname
 function getJoinedRoomname(username) {
@@ -69,7 +76,7 @@ function initSocketIoCallbacks(_io) {
     });
 }
 
-function getDefaultInitialisedRoom(gameType, theme) {
+function getDefaultInitialisedRoom(gameType, theme, timeSeconds) {
     return {
         data: {
             boardData: [],
@@ -77,6 +84,7 @@ function getDefaultInitialisedRoom(gameType, theme) {
         },
         gameType: gameType,
         theme: theme,
+        timeSeconds: timeSeconds,
         members: [],
         allPlayersReadyMap: new Map(),
         solutions: new Map(),
@@ -93,8 +101,9 @@ function onConnection(socket) {
 
         let roomname = data.roomname;
         let username = data.username;
-        let gameType = data.gameType;
+        let gameType = data.gameType;        
         let theme = data.theme;
+        let timeSeconds = data.timeSeconds;
 
         if(!roomname || !username || !gameType || !theme){
             console.log(ColoredLog.red("Rejected socket.on SOCKET_EVENT_COMING ", true));
@@ -109,7 +118,7 @@ function onConnection(socket) {
             }
         } else {
 
-            rooms[roomname] = getDefaultInitialisedRoom(gameType, theme);
+            rooms[roomname] = getDefaultInitialisedRoom(gameType, theme, timeSeconds);
             rooms[roomname].members.push(username) // adding current member
             console.log("Created new room " + roomname);
         }
@@ -333,7 +342,7 @@ function aggregateAndSortVotes(votes, members) {
 }
 
 function startRound(roomname) {
-    rooms[roomname].timeRemaining = 30; // seconds to answer the solution after problem statement send!!
+    rooms[roomname].timeRemaining = rooms[roomname].timeSeconds; // seconds to answer the solution after problem statement send!!
     let theInterval = setInterval(function () {
 
         if (!roomname || !rooms[roomname]) {
@@ -367,7 +376,8 @@ module.exports = {
     RoomStaticUtils: Object.freeze({
         getRoomGameType: getRoomGameType,
         getRoomTheme: getRoomTheme,
-        getJoinedRoomname: getJoinedRoomname
+        getJoinedRoomname: getJoinedRoomname,
+        getRoomTimeSeconds: getRoomTimeSeconds
     })
 
 }

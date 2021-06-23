@@ -8,6 +8,7 @@
         username: null,
         roomname: null,
         gameType: null,
+        timeSeconds: null,
 
         createSocket: function () {
 
@@ -18,6 +19,7 @@
             rtMan.roomname = window.roomData.roomname
             rtMan.gameType = window.roomData.gameType
             rtMan.theme = window.roomData.theme
+            rtMan.timeSeconds = window.roomData.timeSeconds
 
             rtMan.socket.on('drawing', function (data) {
 

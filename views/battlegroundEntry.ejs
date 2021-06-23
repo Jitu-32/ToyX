@@ -55,6 +55,7 @@
             let roomname = getQueryVariable("roomname");
             let username = getQueryVariable("username");
             let theme = getQueryVariable("theme");
+            let timeSeconds = getQueryVariable("timeSeconds");
 
             if (!roomname || !username || !theme) {
                 $("#loginContainer").show()
@@ -83,7 +84,7 @@
 
             $("#chooseGameTypeTitleH1").html(`Choose Game Mode for <mark style="color: blue;background: aliceblue;">${roomname}</mark>`)
 
-            const nextBaseUrl = `/battleground?roomname=${roomname}&username=${username}&theme=${theme}&gameType=`
+            const nextBaseUrl = `/battleground?roomname=${roomname}&username=${username}&theme=${theme}&timeSeconds=${timeSeconds}&gameType=`
             $("#gameTypeWord").attr("href", nextBaseUrl + "word")
             $("#gameTypePicture").attr("href", nextBaseUrl + "picture")
             $("#gameTypeGuess").attr("href", nextBaseUrl + "guess")
@@ -133,6 +134,10 @@
                         <option value="personalities">Personalities</option>
                         <option value="history">History</option>
                     </select>
+                </div>
+
+                <div style="text-align: center;">
+                    <input id="timeInput" type="number" min="5" max="180" placeholder="Enter time of game (seconds)" name="timeSeconds" style="width: 100%; text-align: center;"/>
                 </div>
                 
 
