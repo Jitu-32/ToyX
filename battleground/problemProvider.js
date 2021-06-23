@@ -4,6 +4,7 @@ const csv = require('csv-parser')
 const fs = require('fs')
 
 const allValidThemes = new Set();
+allValidThemes.add("_random_"); // random theme support
 
 const allWordProblems = [];
 const wordTitle = "Draw doodle for these words:";
@@ -64,7 +65,7 @@ function getRandomProblem(targetTheme, gameType) {
             throw new Error("unknown gameType: " + gameType);
     }
     baseProblems.forEach(aProblem => {
-        if (aProblem.theme === targetTheme)
+        if (aProblem.theme === targetTheme || targetTheme === "_random_")
             shortlistedProblems.push(aProblem)
     });
 

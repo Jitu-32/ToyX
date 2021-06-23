@@ -37,7 +37,10 @@
             function updateLoginButtonState() {
                 let themeSelected = ($("#themeSelect").find('option:selected').text() !== "Select Theme");
 
-                if (themeSelected && $("#usernameInput").val().length > 0 && $("#roomnameInput").val().length > 0)
+                if (themeSelected && $("#usernameInput").val().length > 0
+                    && $("#roomnameInput").val().length > 0
+                    && $("#timeInput").val().length > 0
+                )
                     $("#submitBtn").removeAttr('disabled')
 
                 else
@@ -75,6 +78,12 @@
                 $("#roomnameInput").on('input', function () {
                     updateLoginButtonState();
                 });
+
+                $("#timeInput").on('input', function () {
+                    updateLoginButtonState();
+                });
+                
+                updateLoginButtonState();
                 return;
             }
 
@@ -128,6 +137,7 @@
                 <div style="text-align: center;">
                     <select class="dd-button" id="themeSelect" name="theme">
                         <option>Select Theme</option>
+                        <option value="_random_">Random Theme</option>
                         <option value="mythology">Mythology</option>
                         <option value="monuments">Historical Monuments</option>
                         <option value="culture">Indian Culture</option>
@@ -137,9 +147,10 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <input id="timeInput" type="number" min="5" max="180" placeholder="Enter time of game (seconds)" name="timeSeconds" style="width: 100%; text-align: center;"/>
+                    <input id="timeInput" type="number" min="5" max="180" placeholder="Enter time of game (seconds)"
+                        name="timeSeconds" style="width: 100%; text-align: center;" />
                 </div>
-                
+
 
 
             </div>
