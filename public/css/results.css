@@ -36,7 +36,7 @@
 
 .carrd{
   margin : auto;
-  width: 350px;
+  width: 400px;
   overflow : hidden;
   border-radius : 20px;
   background : rgb(217, 217, 241);
@@ -46,7 +46,7 @@
 }
 
 .carrd img{
-  width: 350px;
+  width: 400px;
   height:350px;
   object-fit:cover;
 }
