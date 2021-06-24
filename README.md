@@ -1,6 +1,6 @@
 # ToyX - DOODLE 4RCE
 ### Visit our website for playing our game: [Doodle 4rce](https://toyx-doodle.herokuapp.com/)
-Team **ToyX** presents a onstop platform **"DOODLE 4RCE"** for Doodle Art where users can not only foster their creativity but also learn while having Fun with your Friends!
+Team **ToyX** presents a onestop platform **"DOODLE 4RCE"** for Doodle Art where users can not only foster their creativity but also learn while having Fun with your Friends!
 It is a Competitive doodling platform where doodlers and learners from different age groups can connect with each other and face a doodling challenge. A Doodle community where the users can present their doodles, post them on social media sites, and get featured on the platform.
 We have following Game Modes: 
 - Picture Doodle: Each player has to doodle given picture.
